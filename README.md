@@ -1,5 +1,5 @@
 <div align="center">
-  ![Logo][logo]
+  <img src="https://github.com/MirrorBytes/phorm-utils/blob/main/Logo.png" />
 </div>
 
 ## Packages
@@ -8,5 +8,4 @@
 
 
 
-[logo]: https://github.com/MirrorBytes/phorm-utils/blob/main/Logo.png "Logo"
 [multi]: https://github.com/MirrorBytes/phorm-utils/packages/multi

@@ -1,0 +1,17 @@
+{
+  // ESLint
+  "eslint.validate": ["svelte", "json", "jsonc"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false,
+  },
+
+  // Prettier
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.requireConfig": true,
+
+  // Svelte
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode",
+  },
+}

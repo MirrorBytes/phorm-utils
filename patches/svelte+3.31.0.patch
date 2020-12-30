@@ -1,0 +1,58 @@
+diff --git a/node_modules/svelte/internal/index.js b/node_modules/svelte/internal/index.js
+index f7e7399..8c9fa48 100644
+--- a/node_modules/svelte/internal/index.js
++++ b/node_modules/svelte/internal/index.js
+@@ -809,14 +809,16 @@ function transition_out(block, local, detach, callback) {
+         if (outroing.has(block))
+             return;
+         outroing.add(block);
+-        outros.c.push(() => {
+-            outroing.delete(block);
+-            if (callback) {
+-                if (detach)
+-                    block.d(1);
+-                callback();
+-            }
+-        });
++        if (outros !== undefined) {
++            outros.c.push(() => {
++                outroing.delete(block);
++                if (callback) {
++                    if (detach)
++                        block.d(1);
++                    callback();
++                }
++            });
++        }
+         block.o(local);
+     }
+ }
+diff --git a/node_modules/svelte/internal/index.mjs b/node_modules/svelte/internal/index.mjs
+index b901b68..78febde 100644
+--- a/node_modules/svelte/internal/index.mjs
++++ b/node_modules/svelte/internal/index.mjs
+@@ -806,14 +806,16 @@ function transition_out(block, local, detach, callback) {
+         if (outroing.has(block))
+             return;
+         outroing.add(block);
+-        outros.c.push(() => {
+-            outroing.delete(block);
+-            if (callback) {
+-                if (detach)
+-                    block.d(1);
+-                callback();
+-            }
+-        });
++        if (outros !== undefined) {
++            outros.c.push(() => {
++                outroing.delete(block);
++                if (callback) {
++                    if (detach)
++                        block.d(1);
++                    callback();
++                }
++            });
++        }
+         block.o(local);
+     }
+ }

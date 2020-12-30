@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - name: Cancel previous runs
+      uses: styfle/cancel-workflow-action@0.6.0
+      with:
+        access_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - uses: actions/checkout@v2
+
+    - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Setup nodejs
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: 14.x
+    - name: Install deps
+      run: yarn
+    - name: Validate packages
+      run: yarn validate
+
+  # release:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #   - name: Cancel previous runs
+  #     uses: styfle/cancel-workflow-action@0.6.0
+  #     with:
+  #       access_token: ${{ secrets.GITHUB_TOKEN }}
+
+  #   - uses: actions/checkout@v2
+
+  #   - uses: actions/cache@v2
+  #       with:
+  #         path: '**/node_modules'
+  #         key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+  #   - name: Setup nodejs
+  #     uses: actions/setup-node@v2-beta
+  #     with:
+  #       node-version: 14.x
+  #   - name: Validate & publish packages
+  #     run: yarn publish
+  #     env:
+  #       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

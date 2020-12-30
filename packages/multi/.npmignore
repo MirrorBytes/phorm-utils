@@ -1,0 +1,7 @@
+__tests__
+
+.eslintignore
+.eslintrc.js
+.prettierrc.js
+rollup.config.js
+svelte.config.js

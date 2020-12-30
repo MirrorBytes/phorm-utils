@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "esnext",
+    "types": ["svelte", "jest"],
+    "rootDir": "./runtime",
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "esModuleInterop": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "strict": true,
+    "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": false,
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true
+  },
+  "exclude": ["runtime/__tests__", "dist"]
+}

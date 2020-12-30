@@ -1,0 +1,52 @@
+{
+  "name": "@phorm-utils/mono",
+  "private": true,
+  "author": {
+    "name": "MirrorBytes <Bob>"
+  },
+  "license": "ISC",
+  "homepage": "https://github.com/MirrorBytes/phorm-utils",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MirrorBytes/phorm-utils"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "postinstall": "yarn patch-package",
+    "lint": "yarn workspaces run lint",
+    "test": "yarn workspaces run test",
+    "build": "yarn workspaces run build",
+    "validate": "npm-run-all lint test build",
+    "publish": "yarn validate && yarn lerna publish"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "husky": "^4.3.6",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.5.3",
+    "npm-run-all": "^4.1.5",
+    "patch-package": "^6.2.2",
+    "postinstall-postinstall": "^2.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,ts,svelte}": [
+      "yarn lint",
+      "yarn test",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  }
+}

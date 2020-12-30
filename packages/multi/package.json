@@ -1,0 +1,78 @@
+{
+  "name": "@phorm-utils/multi",
+  "version": "1.0.0",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "author": {
+    "name": "MirrorBytes <smokebytes@gmail.com>"
+  },
+  "homepage": "https://github.com/MirrorBytes/phorm-utils/packages/multi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MirrorBytes/phorm-utils/packages/multi"
+  },
+  "keywords": [
+    "svelte",
+    "form",
+    "ui",
+    "ux"
+  ],
+  "scripts": {
+    "lint": "eslint --ext .cjs,.js,.ts,.json,.svelte .",
+    "test": "jest ./runtime/__tests__",
+    "dev": "rollup -cw",
+    "build": "rollup -c"
+  },
+  "peerDependencies": {
+    "svelte": "^3.31.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "@rollup/plugin-typescript": "^8.1.0",
+    "@testing-library/dom": "^7.29.0",
+    "@testing-library/svelte": "^3.0.3",
+    "@testing-library/user-event": "^12.6.0",
+    "@types/jest": "^26.0.19",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-svelte3": "^3.0.0",
+    "eslint-svelte3-preprocess": "^0.0.4",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "prettier-plugin-svelte": "^1.4.2",
+    "rollup": "^2.35.1",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "svelte": "^3.31.0",
+    "svelte-jester": "^1.3.0",
+    "svelte-preprocess": "^4.6.1",
+    "ts-jest": "^26.4.4",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.3"
+  },
+  "jest": {
+    "testMatch": [
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ],
+    "transform": {
+      "^.+\\.svelte$": [
+        "svelte-jester",
+        {
+          "preprocess": true
+        }
+      ],
+      "^.+\\.html$": "svelte-jester",
+      "^.+\\.ts$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "svelte"
+    ]
+  }
+}

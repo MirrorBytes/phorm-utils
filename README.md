@@ -8,4 +8,4 @@
 
 
 
-[multi]: https://github.com/MirrorBytes/phorm-utils/packages/multi
+[multi]: https://github.com/MirrorBytes/phorm-utils/tree/main/packages/multi

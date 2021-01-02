@@ -15,6 +15,7 @@
   ],
   "scripts": {
     "postinstall": "yarn patch-package",
+    "toc": "yarn workspaces run toc",
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",
     "build": "yarn workspaces run build",
@@ -38,6 +39,9 @@
     }
   },
   "lint-staged": {
+    "README.md": [
+      "yarn toc"
+    ],
     "**/*.{js,ts,svelte}": [
       "yarn lint",
       "yarn test"

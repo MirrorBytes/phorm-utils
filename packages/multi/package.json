@@ -19,6 +19,7 @@
     "ux"
   ],
   "scripts": {
+    "toc": "doctoc README.md",
     "lint": "eslint --ext .cjs,.js,.ts,.json,.svelte .",
     "test": "jest ./runtime/__tests__",
     "dev": "rollup -cw",
@@ -37,6 +38,7 @@
     "@types/jest": "^26.0.19",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
+    "doctoc": "^2.0.0",
     "eslint": "^7.16.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.0",

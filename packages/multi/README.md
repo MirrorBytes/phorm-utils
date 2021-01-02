@@ -2,6 +2,19 @@
   <img src="https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/Logo.png" />
 </div>
 
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Concept](#concept)
+- [Components](#components)
+- [Props](#props)
+  - [Form](#form)
+  - [Field](#field)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Concept
 
 Allow this library to contain all state management of forms whether they be
@@ -38,7 +51,7 @@ Field has several underlying components:
 
 You can pass any props into the exposed components and they'll be passed to the primary element. However, there are a few exceptions:
 
-- ### Form
+### Form
 
 `Form` exposes a single prop which is controlled by the component: `store`.
 
@@ -135,7 +148,7 @@ Or, you can created your own `IndexableJsonValue` store that you control:
 </Form>
 ```
 
-- ### Field
+### Field
 
 `Field` is a bit more complex as it takes `store`, `field` (which are the field props), and `initial`.
 

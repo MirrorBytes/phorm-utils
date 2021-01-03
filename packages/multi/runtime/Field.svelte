@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, getContext } from 'svelte';
   import type { Writable } from 'svelte/store';
 
   import { FieldType } from './types';
   import type { JsonPrim, IndexableJsonValue, FieldProps } from './types';
   import { selectPath } from './internal';
+  import { STORE } from './contexts';
 
   import Input from './controls/Input.svelte';
   import Textarea from './controls/Textarea.svelte';
@@ -13,9 +14,9 @@
   import Checkbox from './controls/Checkbox.svelte';
 
   export let field: FieldProps;
-  export let store: Writable<IndexableJsonValue>;
   export let initial: JsonPrim = undefined;
 
+  const store: Writable<IndexableJsonValue> = getContext(STORE);
   const dispatch = createEventDispatcher();
 
   $: id = field.id;
@@ -90,7 +91,8 @@
     {accept}
     {label}
     {classes}
-    {path} />
+    {path}
+    {...$$restProps} />
 {:else if type === FieldType.Textarea}
   <Textarea
     on:input={onInput}
@@ -106,7 +108,8 @@
     {cols}
     {label}
     {classes}
-    {path} />
+    {path}
+    {...$$restProps} />
 {:else if type === FieldType.Select}
   <Select
     on:blur={onBlur}
@@ -121,7 +124,8 @@
     {multiple}
     {label}
     {classes}
-    {path}>
+    {path}
+    {...$$restProps}>
     <slot />
   </Select>
 {:else if type === FieldType.Radio}
@@ -134,5 +138,6 @@
     {items}
     {path}
     {label}
-    {classes} />
+    {classes}
+    {...$$restProps} />
 {/if}

@@ -5,9 +5,8 @@
   import Field from '../../Field.svelte';
 </script>
 
-<Form let:store>
+<Form>
   <Field
-    {store}
     field={{ type: FieldType.Text, id: 'test_input', name: 'test_input', placeholder: 'Test Input', label: { text: 'Test Input' } }} />
 
   <input type="submit" value="Submit" />

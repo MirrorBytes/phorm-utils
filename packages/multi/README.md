@@ -11,7 +11,9 @@
 - [Components](#components)
 - [Props](#props)
   - [Form](#form)
+  - [Step](#step)
   - [Field](#field)
+- [Example](#example)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -22,9 +24,10 @@ single step, or multiple.
 
 ## Components
 
-There are two exposed components that can be used as of now:
+There are three exposed components that can be used as of now:
 
 - [Form][form]
+- [Step][step]
 - [Field][field]
 
 Field has several underlying components:
@@ -53,21 +56,25 @@ You can pass any props into the exposed components and they'll be passed to the 
 
 ### Form
 
-`Form` exposes a single prop which is controlled by the component: `store`.
+`Form` exposes several props which are related to the multi-step control:
 
-You can either allow `Form` to control it completely, and use the `let:` directive to pass the store back:
+- `current`, index of current step
+- `prev`, this is a function for form control
+- `next`, this is a function for form control
+- `controls_class`, custom class passed to the controls container
 
-```html
-<script lang="ts">
-  import { Form } from '@phorm-utils/multi';
-</script>
+`Form` sets two contexts as well: `store` and `multi`. These can be accessed:
 
-<Form let:store>
-...
-</Form>
+```typescript
+import { getContext } from 'svelte';
+import type { Writable } from 'svelte/store';
+import { STORE, MULTI, IndexableJsonValue } from '@phorm-utils/multi';
+
+const store: Writable<IndexableJsonValue> = getContext(STORE);
+const multi: Writable<IndexableJsonValue> = getContext(MULTI);
 ```
 
-Or, you can created your own `IndexableJsonValue` store that you control:
+`store` can be passed into `Form` if there's a separate implentation of `IndexableJsonValue` you'd prefer (this will be saved to the context):
 
 ```html
 <script lang="ts">
@@ -84,7 +91,7 @@ Or, you can created your own `IndexableJsonValue` store that you control:
 </Form>
 ```
 
-`Form` also controls a few function directives with returned `CustomEvent`s:
+`Form` also controls a few built-in function directives with returned `CustomEvent`s:
 
 - `on:submit`, with preventDefault, to pass the store back to you (**THIS DOES PREVENT ACTION FROM BEING USED**):
 
@@ -96,14 +103,14 @@ Or, you can created your own `IndexableJsonValue` store that you control:
   const onSubmit = (ev: CustomEvent<SubmitType>) => {
     const {
       e,      // Original submit event
-      store,  // Will either be form controll store, or one you declared
+      store,  // Will either be form control store, or one you declared
     } = ev.detail;
 
     console.log(e, store);
   };
 </script>
 
-<Form let:store on:submit={onSubmit}>
+<Form on:submit={onSubmit}>
 ...
 </Form>
 ```
@@ -123,7 +130,7 @@ Or, you can created your own `IndexableJsonValue` store that you control:
   };
 </script>
 
-<Form let:store on:contextmenu={onContextMenu}>
+<Form on:contextmenu={onContextMenu}>
 ...
 </Form>
 ```
@@ -143,26 +150,36 @@ Or, you can created your own `IndexableJsonValue` store that you control:
   };
 </script>
 
-<Form let:store on:click={onClick}>
+<Form on:click={onClick}>
 ...
 </Form>
 ```
 
-### Field
-
-`Field` is a bit more complex as it takes `store`, `field` (which are the field props), and `initial`.
-
-- `store`, this is the form controlled or store you created (**THE BELOW CODE WILL ERROR, FIELD PROP IS REQUIRED**):
+Finally, `Form` has a few named slots that can be used as controls, `prev`, `next`, and `submit`:
 
 ```html
 <script lang="ts">
-  import { Form, Field } from '@phorm-utils/multi';
+  import { Form } from '@phorm-utils/multi';
 </script>
 
-<Form let:store>
-  <Field {store} />
+<Form let:prev let:next>
+...
+
+  <button slot="prev" on:click|preventDefault={prev}>Prev</button>
+  <button slot="next" on:click|preventDefault={next}>Next</button>
+  <input slot="submit" type="submit" placeholder="Submit" />
 </Form>
 ```
+
+### Step
+
+`Step` is technically just a wrapper, and exposes only a single prop:
+
+- `name`, which is used as the overall header/label for the step.
+
+### Field
+
+`Field` is a bit more complex as it takes `field` (which are the field props) and `initial`.
 
 - `field` consists of the following information:
 
@@ -297,7 +314,6 @@ That's a bit much, but it's fairly straight forward.
 
 <Form {store}>
   <Field
-    {store}
     field={{ id: '1', name: '1', type: FieldType.Text, path: ['test', 'testing', 0, 'value'] }} />
 </Form>
 ```
@@ -311,9 +327,8 @@ This allows for the value in store to be updated properly in the nest.
   import { Form, Field, FieldType } from '@phorm-utils/multi';
 </script>
 
-<Form let:store>
+<Form>
   <Field
-    {store}
     field={{
       id: '1',
       name: '1',
@@ -328,10 +343,130 @@ This allows for the value in store to be updated properly in the nest.
 
 Note that radio will return a string value, and checkbox will return an array of string values.
 
+## Example
+
+- `us_states.ts`:
+
+```typescript
+export default [
+  "AK",
+  "AL",
+  "AR",
+  "AZ",
+  "CA",
+  "CO",
+  "CT",
+  "DE",
+  "FL",
+  "GA",
+  "HI",
+  "IA",
+  "ID",
+  "IL",
+  "IN",
+  "KS",
+  "KY",
+  "LA",
+  "MA",
+  "MD",
+  "ME",
+  "MI",
+  "MN",
+  "MO",
+  "MS",
+  "MT",
+  "NC",
+  "ND",
+  "NE",
+  "NH",
+  "NJ",
+  "NM",
+  "NV",
+  "NY",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "UT",
+  "VA",
+  "WA",
+  "WI",
+  "WV",
+  "WY"
+];
+```
+
+- `App.svelte`:
+
+```html
+<script lang="ts">
+  import { Form, Step, Field, FieldType } from '@phorm-utils/multi';
+
+  import states from "./us_states";
+</script>
+
+<main>
+  <Form let:prev let:next>
+    <Step name="Customer Info">
+      <Field field={{ id: 'first_name', name: 'first_name', type: FieldType.Text, placeholder: 'First Name' }} />
+      <Field field={{ id: 'last_name', name: 'last_name', type: FieldType.Text, placeholder: 'Last Name' }} />
+      <Field field={{ id: 'phone', name: 'phone', type: FieldType.Tel, placeholder: 'Phone' }} />
+      <Field field={{ id: 'email', name: 'email', type: FieldType.Email, placeholder: 'Email' }} />
+    </Step>
+
+    <Step name="Billing Info">
+      <Field field={{ id: 'bill_addr', name: 'bill_addr', type: FieldType.Text, placeholder: 'Address' }} />
+      <Field field={{ id: 'bill_addr2', name: 'bill_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
+      <Field field={{ id: 'bill_city', name: 'bill_city', type: FieldType.Text, placeholder: 'City' }} />
+      <Field field={{ id: 'bill_st', name: 'bill_st', type: FieldType.Select }}>
+        <option>State</option>
+
+        {#each states as state}
+          <option value={state}>{state}</option>
+        {/each}
+      </Field>
+      <Field field={{ id: 'bill_zip', name: 'bill_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
+    </Step>
+
+    <Step name="Shipping Info">
+      <Field field={{ id: 'ship_addr', name: 'ship_addr', type: FieldType.Text, placeholder: 'Address' }} />
+      <Field field={{ id: 'ship_addr2', name: 'ship_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
+      <Field field={{ id: 'ship_city', name: 'ship_city', type: FieldType.Text, placeholder: 'City' }} />
+      <Field field={{ id: 'ship_st', name: 'ship_st', type: FieldType.Select }}>
+        <option>State</option>
+
+        {#each states as state}
+          <option value={state}>{state}</option>
+        {/each}
+      </Field>
+      <Field field={{ id: 'ship_zip', name: 'ship_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
+    </Step>
+
+    <Step name="Payment Info">
+      <Field field={{ id: 'card', name: 'card', type: FieldType.Number, placeholder: 'Card Number' }} />
+      <Field field={{ id: 'month', name: 'month', type: FieldType.Number, placeholder: 'Month' }} />
+      <Field field={{ id: 'year', name: 'year', type: FieldType.Number, placeholder: 'Year' }} />
+      <Field field={{ id: 'cvv', name: 'cvv', type: FieldType.Number, placeholder: 'CVV' }} />
+      <Field field={{ id: 'card_zip', name: 'card_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
+    </Step>
+
+    <button slot="prev" on:click|preventDefault={prev}>Prev</button>
+    <button slot="next" on:click|preventDefault={next}>Next</button>
+    <input slot="submit" type="submit" placeholder="Submit" />
+  </Form>
+</main>
+```
+
 
 
 
 [form]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/Form.svelte
+[step]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/Step.svelte
 [field]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/Field.svelte
 [types]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/types.ts#L17
 [checkbox]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/controls/Checkbox.svelte

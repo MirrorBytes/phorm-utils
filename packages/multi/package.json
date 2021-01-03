@@ -7,10 +7,10 @@
   "author": {
     "name": "MirrorBytes <smokebytes@gmail.com>"
   },
-  "homepage": "https://github.com/MirrorBytes/phorm-utils/packages/multi",
+  "homepage": "https://github.com/MirrorBytes/phorm-utils/tree/main/packages/multi",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MirrorBytes/phorm-utils/packages/multi"
+    "url": "https://github.com/MirrorBytes/phorm-utils/tree/main/packages/multi"
   },
   "keywords": [
     "svelte",

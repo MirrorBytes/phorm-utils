@@ -1,0 +1,30 @@
+<script lang="ts">
+  import { FieldType } from '../../types';
+
+  import Form from '../../Form.svelte';
+  import Step from '../../Step.svelte';
+  import Field from '../../Field.svelte';
+</script>
+
+<Form let:prev let:next>
+  <Step name="Test Step 1">
+    <Field
+      field={{ id: 'test_input', name: 'test_input', type: FieldType.Text, placeholder: 'Test Input' }} />
+  </Step>
+
+  <Step name="Test Step 2">
+    <Field
+      field={{ id: 'test_input_2', name: 'test_input_2', type: FieldType.Text, placeholder: 'Test Input 2' }} />
+  </Step>
+
+  <Step name="Test Step 3">
+    <Field
+      field={{ id: 'test_input_3', name: 'test_input_3', type: FieldType.Text, placeholder: 'Test Input 3' }} />
+  </Step>
+
+  <button slot="prev" on:click|preventDefault={prev}>Prev</button>
+
+  <button slot="next" on:click|preventDefault={next}>Next</button>
+
+  <input slot="submit" type="submit" placeholder="Submit" />
+</Form>

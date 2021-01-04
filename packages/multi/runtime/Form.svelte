@@ -56,7 +56,7 @@
   on:contextmenu={onContextMenu}
   on:click={onClick}
   {...$$restProps}>
-  <slot {current} {prev} {next} />
+  <slot {prev} {next} />
 
   <div class={controls_class ? controls_class : ''}>
     {#if Object.keys($multi)[current - 1]}

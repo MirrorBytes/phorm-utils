@@ -58,7 +58,6 @@ You can pass any props into the exposed components and they'll be passed to the 
 
 `Form` exposes several props which are related to the multi-step control:
 
-- `current`, index of current step
 - `prev`, this is a function for form control
 - `next`, this is a function for form control
 - `controls_class`, custom class passed to the controls container
@@ -401,6 +400,24 @@ export default [
 ];
 ```
 
+- `Header.svelte`:
+
+```html
+<script lang="ts">
+  import { getContext } from 'svelte';
+  import type { Writable } from 'svelte/store';
+  import { IndexableJsonValue, MULTI } from '@phorm-utils/multi';
+
+  const multi: Writable<IndexableJsonValue> = getContext(MULTI);
+</script>
+
+<header>
+  {#each Object.keys($multi) as step}
+    <div class:active={$multi[step]}>{step}</div>
+  {/each}
+</header>
+```
+
 - `App.svelte`:
 
 ```html
@@ -408,58 +425,66 @@ export default [
   import { Form, Step, Field, FieldType } from '@phorm-utils/multi';
 
   import states from "./us_states";
+
+  import Header from './Header.svelte';
+
+  const onSubmit = (ev: CustomEvent<SubmitType>) => {
+    const { e, store } = ev.detail;
+
+    console.log(e, store);
+  };
 </script>
 
-<main>
-  <Form let:prev let:next>
-    <Step name="Customer Info">
-      <Field field={{ id: 'first_name', name: 'first_name', type: FieldType.Text, placeholder: 'First Name' }} />
-      <Field field={{ id: 'last_name', name: 'last_name', type: FieldType.Text, placeholder: 'Last Name' }} />
-      <Field field={{ id: 'phone', name: 'phone', type: FieldType.Tel, placeholder: 'Phone' }} />
-      <Field field={{ id: 'email', name: 'email', type: FieldType.Email, placeholder: 'Email' }} />
-    </Step>
+<Form let:prev let:next on:submit={onSubmit}>
+  <Header />
 
-    <Step name="Billing Info">
-      <Field field={{ id: 'bill_addr', name: 'bill_addr', type: FieldType.Text, placeholder: 'Address' }} />
-      <Field field={{ id: 'bill_addr2', name: 'bill_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
-      <Field field={{ id: 'bill_city', name: 'bill_city', type: FieldType.Text, placeholder: 'City' }} />
-      <Field field={{ id: 'bill_st', name: 'bill_st', type: FieldType.Select }}>
-        <option>State</option>
+  <Step name="Customer Info">
+    <Field field={{ id: 'first_name', name: 'first_name', type: FieldType.Text, placeholder: 'First Name' }} />
+    <Field field={{ id: 'last_name', name: 'last_name', type: FieldType.Text, placeholder: 'Last Name' }} />
+    <Field field={{ id: 'phone', name: 'phone', type: FieldType.Tel, placeholder: 'Phone' }} />
+    <Field field={{ id: 'email', name: 'email', type: FieldType.Email, placeholder: 'Email' }} />
+  </Step>
 
-        {#each states as state}
-          <option value={state}>{state}</option>
-        {/each}
-      </Field>
-      <Field field={{ id: 'bill_zip', name: 'bill_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
-    </Step>
+  <Step name="Billing Info">
+    <Field field={{ id: 'bill_addr', name: 'bill_addr', type: FieldType.Text, placeholder: 'Address' }} />
+    <Field field={{ id: 'bill_addr2', name: 'bill_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
+    <Field field={{ id: 'bill_city', name: 'bill_city', type: FieldType.Text, placeholder: 'City' }} />
+    <Field field={{ id: 'bill_st', name: 'bill_st', type: FieldType.Select }}>
+      <option>State</option>
 
-    <Step name="Shipping Info">
-      <Field field={{ id: 'ship_addr', name: 'ship_addr', type: FieldType.Text, placeholder: 'Address' }} />
-      <Field field={{ id: 'ship_addr2', name: 'ship_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
-      <Field field={{ id: 'ship_city', name: 'ship_city', type: FieldType.Text, placeholder: 'City' }} />
-      <Field field={{ id: 'ship_st', name: 'ship_st', type: FieldType.Select }}>
-        <option>State</option>
+      {#each states as state}
+        <option value={state}>{state}</option>
+      {/each}
+    </Field>
+    <Field field={{ id: 'bill_zip', name: 'bill_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
+  </Step>
 
-        {#each states as state}
-          <option value={state}>{state}</option>
-        {/each}
-      </Field>
-      <Field field={{ id: 'ship_zip', name: 'ship_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
-    </Step>
+  <Step name="Shipping Info">
+    <Field field={{ id: 'ship_addr', name: 'ship_addr', type: FieldType.Text, placeholder: 'Address' }} />
+    <Field field={{ id: 'ship_addr2', name: 'ship_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
+    <Field field={{ id: 'ship_city', name: 'ship_city', type: FieldType.Text, placeholder: 'City' }} />
+    <Field field={{ id: 'ship_st', name: 'ship_st', type: FieldType.Select }}>
+      <option>State</option>
 
-    <Step name="Payment Info">
-      <Field field={{ id: 'card', name: 'card', type: FieldType.Number, placeholder: 'Card Number' }} />
-      <Field field={{ id: 'month', name: 'month', type: FieldType.Number, placeholder: 'Month' }} />
-      <Field field={{ id: 'year', name: 'year', type: FieldType.Number, placeholder: 'Year' }} />
-      <Field field={{ id: 'cvv', name: 'cvv', type: FieldType.Number, placeholder: 'CVV' }} />
-      <Field field={{ id: 'card_zip', name: 'card_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
-    </Step>
+      {#each states as state}
+        <option value={state}>{state}</option>
+      {/each}
+    </Field>
+    <Field field={{ id: 'ship_zip', name: 'ship_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
+  </Step>
 
-    <button slot="prev" on:click|preventDefault={prev}>Prev</button>
-    <button slot="next" on:click|preventDefault={next}>Next</button>
-    <input slot="submit" type="submit" placeholder="Submit" />
-  </Form>
-</main>
+  <Step name="Payment Info">
+    <Field field={{ id: 'card', name: 'card', type: FieldType.Number, placeholder: 'Card Number' }} />
+    <Field field={{ id: 'month', name: 'month', type: FieldType.Number, placeholder: 'Month' }} />
+    <Field field={{ id: 'year', name: 'year', type: FieldType.Number, placeholder: 'Year' }} />
+    <Field field={{ id: 'cvv', name: 'cvv', type: FieldType.Number, placeholder: 'CVV' }} />
+    <Field field={{ id: 'card_zip', name: 'card_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
+  </Step>
+
+  <button slot="prev" on:click|preventDefault={prev}>Prev</button>
+  <button slot="next" on:click|preventDefault={next}>Next</button>
+  <input slot="submit" type="submit" placeholder="Submit" />
+</Form>
 ```
 
 

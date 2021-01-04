@@ -19,7 +19,8 @@
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",
     "build": "yarn workspaces run build",
-    "validate": "npm-run-all lint test build"
+    "validate": "npm-run-all lint test build",
+    "lerna:publish": "yarn validate && yarn lerna publish -y -m \"chore(release): %s\""
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",

@@ -12,6 +12,9 @@
     "type": "git",
     "url": "https://github.com/MirrorBytes/phorm-utils/tree/main/packages/multi"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "svelte",
     "form",

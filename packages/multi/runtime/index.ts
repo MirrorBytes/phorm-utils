@@ -1,4 +1,4 @@
-export { FieldType } from './types';
+export * from './types';
 export { STORE, MULTI } from './contexts';
 
 export { default as Form } from './Form.svelte';

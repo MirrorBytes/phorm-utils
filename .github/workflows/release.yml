@@ -55,6 +55,6 @@ jobs:
       with:
         node-version: 14.x
     - name: Validate & publish packages
-      run: yarn publish
+      run: yarn lerna:publish
       env:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

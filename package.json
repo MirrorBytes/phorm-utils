@@ -1,6 +1,5 @@
 {
   "name": "@phorm-utils/mono",
-  "private": true,
   "license": "ISC",
   "author": {
     "name": "MirrorBytes <Bob>"

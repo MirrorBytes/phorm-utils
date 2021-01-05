@@ -1,13 +1,10 @@
 <script lang="ts">
-  import { getContext } from 'svelte';
   import type { Writable } from 'svelte/store';
 
   import type { IndexableJsonValue } from './types';
-  import { MULTI } from './contexts';
 
   export let name: string;
-
-  const multi: Writable<IndexableJsonValue> = getContext(MULTI);
+  export let multi: Writable<IndexableJsonValue>;
 
   multi.update((v) => {
     v[name] = false;

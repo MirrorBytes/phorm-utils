@@ -62,25 +62,26 @@ You can pass any props into the exposed components and they'll be passed to the 
 - `next`, this is a function for form control
 - `controls_class`, custom class passed to the controls container
 
-`Form` sets two contexts as well: `store` and `multi`. These can be accessed:
+`Form` passes two props back as well: `store` and `multi`. These can be accessed using the `let:` directive:
 
-```typescript
-import { getContext } from 'svelte';
-import type { Writable } from 'svelte/store';
-import { STORE, MULTI, IndexableJsonValue } from '@phorm-utils/multi';
+```html
+<script lang="ts">
+  import { Form } from 'svelte-multi';
+</script>
 
-const store: Writable<IndexableJsonValue> = getContext(STORE);
-const multi: Writable<IndexableJsonValue> = getContext(MULTI);
+<Form let:store let:multi>
+...
+</Form>
 ```
 
-`store` can be passed into `Form` if there's a separate implentation of `IndexableJsonValue` you'd prefer (this will be saved to the context):
+`store` can be passed into `Form` if there's a separate implentation of `IndexableJsonValue` you'd prefer:
 
 ```html
 <script lang="ts">
   import { writable } from 'svelte/store';
   import type { Writable } from 'svelte/store';
-  import { Form } from '@phorm-utils/multi';
-  import type { IndexableJsonValue } from '@phorm-utils/multi';
+  import { Form } from 'svelte-multi';
+  import type { IndexableJsonValue } from 'svelte-multi';
 
   const store: Writable<IndexableJsonValue> = writable({});
 </script>
@@ -96,8 +97,8 @@ const multi: Writable<IndexableJsonValue> = getContext(MULTI);
 
 ```html
 <script lang="ts">
-  import { Form } from '@phorm-utils/multi';
-  import type { SubmitType } from '@phorm-utils/multi';
+  import { Form } from 'svelte-multi';
+  import type { SubmitType } from 'svelte-multi';
 
   const onSubmit = (ev: CustomEvent<SubmitType>) => {
     const {
@@ -118,7 +119,7 @@ const multi: Writable<IndexableJsonValue> = getContext(MULTI);
 
 ```html
 <script lang="ts">
-  import { Form } from '@phorm-utils/multi';
+  import { Form } from 'svelte-multi';
 
   const onContextMenu = (ev: CustomEvent) => {
     const {
@@ -138,7 +139,7 @@ const multi: Writable<IndexableJsonValue> = getContext(MULTI);
 
 ```html
 <script lang="ts">
-  import { Form } from '@phorm-utils/multi';
+  import { Form } from 'svelte-multi';
 
   const onClick = (ev: CustomEvent) => {
     const {
@@ -158,7 +159,7 @@ Finally, `Form` has a few named slots that can be used as controls, `prev`, `nex
 
 ```html
 <script lang="ts">
-  import { Form } from '@phorm-utils/multi';
+  import { Form } from 'svelte-multi';
 </script>
 
 <Form let:prev let:next>
@@ -298,7 +299,7 @@ That's a bit much, but it's fairly straight forward.
 ```html
 <script lang="ts">
   import { writable } from 'svelte/store';
-  import { Form, Field, FieldType } from '@phorm-utils/multi';
+  import { Form, Field, FieldType } from 'svelte-multi';
 
   const store = writable({
     test: {
@@ -313,6 +314,7 @@ That's a bit much, but it's fairly straight forward.
 
 <Form {store}>
   <Field
+    {store}
     field={{ id: '1', name: '1', type: FieldType.Text, path: ['test', 'testing', 0, 'value'] }} />
 </Form>
 ```
@@ -323,11 +325,12 @@ This allows for the value in store to be updated properly in the nest.
 
 ```html
 <script lang="ts">
-  import { Form, Field, FieldType } from '@phorm-utils/multi';
+  import { Form, Field, FieldType } from 'svelte-multi';
 </script>
 
-<Form>
+<Form let:store>
   <Field
+    {store}
     field={{
       id: '1',
       name: '1',
@@ -404,11 +407,10 @@ export default [
 
 ```html
 <script lang="ts">
-  import { getContext } from 'svelte';
   import type { Writable } from 'svelte/store';
-  import { IndexableJsonValue, MULTI } from '@phorm-utils/multi';
+  import { IndexableJsonValue } from 'svelte-multi';
 
-  const multi: Writable<IndexableJsonValue> = getContext(MULTI);
+  export let multi: Writable<IndexableJsonValue>;
 </script>
 
 <header>
@@ -422,7 +424,7 @@ export default [
 
 ```html
 <script lang="ts">
-  import { Form, Step, Field, FieldType } from '@phorm-utils/multi';
+  import { Form, Step, Field, FieldType } from 'svelte-multi';
 
   import states from "./us_states";
 
@@ -435,50 +437,50 @@ export default [
   };
 </script>
 
-<Form let:prev let:next on:submit={onSubmit}>
-  <Header />
+<Form let:store let:multi let:prev let:next on:submit={onSubmit}>
+  <Header {multi} />
 
-  <Step name="Customer Info">
-    <Field field={{ id: 'first_name', name: 'first_name', type: FieldType.Text, placeholder: 'First Name' }} />
-    <Field field={{ id: 'last_name', name: 'last_name', type: FieldType.Text, placeholder: 'Last Name' }} />
-    <Field field={{ id: 'phone', name: 'phone', type: FieldType.Tel, placeholder: 'Phone' }} />
-    <Field field={{ id: 'email', name: 'email', type: FieldType.Email, placeholder: 'Email' }} />
+  <Step {multi} name="Customer Info">
+    <Field {store} field={{ id: 'first_name', name: 'first_name', type: FieldType.Text, placeholder: 'First Name' }} />
+    <Field {store} field={{ id: 'last_name', name: 'last_name', type: FieldType.Text, placeholder: 'Last Name' }} />
+    <Field {store} field={{ id: 'phone', name: 'phone', type: FieldType.Tel, placeholder: 'Phone' }} />
+    <Field {store} field={{ id: 'email', name: 'email', type: FieldType.Email, placeholder: 'Email' }} />
   </Step>
 
-  <Step name="Billing Info">
-    <Field field={{ id: 'bill_addr', name: 'bill_addr', type: FieldType.Text, placeholder: 'Address' }} />
-    <Field field={{ id: 'bill_addr2', name: 'bill_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
-    <Field field={{ id: 'bill_city', name: 'bill_city', type: FieldType.Text, placeholder: 'City' }} />
-    <Field field={{ id: 'bill_st', name: 'bill_st', type: FieldType.Select }}>
+  <Step {multi} name="Billing Info">
+    <Field {store} field={{ id: 'bill_addr', name: 'bill_addr', type: FieldType.Text, placeholder: 'Address' }} />
+    <Field {store} field={{ id: 'bill_addr2', name: 'bill_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
+    <Field {store} field={{ id: 'bill_city', name: 'bill_city', type: FieldType.Text, placeholder: 'City' }} />
+    <Field {store} field={{ id: 'bill_st', name: 'bill_st', type: FieldType.Select }}>
       <option>State</option>
 
       {#each states as state}
         <option value={state}>{state}</option>
       {/each}
     </Field>
-    <Field field={{ id: 'bill_zip', name: 'bill_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
+    <Field {store} field={{ id: 'bill_zip', name: 'bill_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
   </Step>
 
-  <Step name="Shipping Info">
-    <Field field={{ id: 'ship_addr', name: 'ship_addr', type: FieldType.Text, placeholder: 'Address' }} />
-    <Field field={{ id: 'ship_addr2', name: 'ship_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
-    <Field field={{ id: 'ship_city', name: 'ship_city', type: FieldType.Text, placeholder: 'City' }} />
-    <Field field={{ id: 'ship_st', name: 'ship_st', type: FieldType.Select }}>
+  <Step {multi} name="Shipping Info">
+    <Field {store} field={{ id: 'ship_addr', name: 'ship_addr', type: FieldType.Text, placeholder: 'Address' }} />
+    <Field {store} field={{ id: 'ship_addr2', name: 'ship_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
+    <Field {store} field={{ id: 'ship_city', name: 'ship_city', type: FieldType.Text, placeholder: 'City' }} />
+    <Field {store} field={{ id: 'ship_st', name: 'ship_st', type: FieldType.Select }}>
       <option>State</option>
 
       {#each states as state}
         <option value={state}>{state}</option>
       {/each}
     </Field>
-    <Field field={{ id: 'ship_zip', name: 'ship_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
+    <Field {store} field={{ id: 'ship_zip', name: 'ship_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
   </Step>
 
-  <Step name="Payment Info">
-    <Field field={{ id: 'card', name: 'card', type: FieldType.Number, placeholder: 'Card Number' }} />
-    <Field field={{ id: 'month', name: 'month', type: FieldType.Number, placeholder: 'Month' }} />
-    <Field field={{ id: 'year', name: 'year', type: FieldType.Number, placeholder: 'Year' }} />
-    <Field field={{ id: 'cvv', name: 'cvv', type: FieldType.Number, placeholder: 'CVV' }} />
-    <Field field={{ id: 'card_zip', name: 'card_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
+  <Step {multi} name="Payment Info">
+    <Field {store} field={{ id: 'card', name: 'card', type: FieldType.Number, placeholder: 'Card Number' }} />
+    <Field {store} field={{ id: 'month', name: 'month', type: FieldType.Number, placeholder: 'Month' }} />
+    <Field {store} field={{ id: 'year', name: 'year', type: FieldType.Number, placeholder: 'Year' }} />
+    <Field {store} field={{ id: 'cvv', name: 'cvv', type: FieldType.Number, placeholder: 'CVV' }} />
+    <Field {store} field={{ id: 'card_zip', name: 'card_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
   </Step>
 
   <button slot="prev" on:click|preventDefault={prev}>Prev</button>

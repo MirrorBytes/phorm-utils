@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { createEventDispatcher, getContext } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import type { Writable } from 'svelte/store';
 
   import { FieldType } from './types';
   import type { JsonPrim, IndexableJsonValue, FieldProps } from './types';
   import { selectPath } from './internal';
-  import { STORE } from './contexts';
 
   import Input from './controls/Input.svelte';
   import Textarea from './controls/Textarea.svelte';
@@ -13,10 +12,10 @@
   import Radio from './controls/Radio.svelte';
   import Checkbox from './controls/Checkbox.svelte';
 
+  export let store: Writable<IndexableJsonValue>;
   export let field: FieldProps;
   export let initial: JsonPrim = undefined;
 
-  const store: Writable<IndexableJsonValue> = getContext(STORE);
   const dispatch = createEventDispatcher();
 
   $: id = field.id;

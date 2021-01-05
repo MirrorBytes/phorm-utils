@@ -1,17 +1,14 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount, setContext } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import { writable } from 'svelte/store';
   import type { Writable } from 'svelte/store';
 
   import type { IndexableJsonValue } from './types';
-  import { STORE, MULTI } from './contexts';
 
   export let controls_class: string | undefined = undefined;
   export let store: Writable<IndexableJsonValue> = writable({});
-  setContext(STORE, store);
 
   const multi: Writable<IndexableJsonValue> = writable({});
-  setContext(MULTI, multi);
 
   let current = 0;
 
@@ -56,7 +53,7 @@
   on:contextmenu={onContextMenu}
   on:click={onClick}
   {...$$restProps}>
-  <slot {prev} {next} />
+  <slot {store} {multi} {prev} {next} />
 
   <div class={controls_class ? controls_class : ''}>
     {#if Object.keys($multi)[current - 1]}

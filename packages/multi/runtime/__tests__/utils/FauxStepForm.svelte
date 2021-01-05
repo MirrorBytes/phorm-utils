@@ -6,19 +6,22 @@
   import Field from '../../Field.svelte';
 </script>
 
-<Form let:prev let:next>
-  <Step name="Test Step 1">
+<Form let:store let:multi let:prev let:next>
+  <Step {multi} name="Test Step 1">
     <Field
+      {store}
       field={{ id: 'test_input', name: 'test_input', type: FieldType.Text, placeholder: 'Test Input' }} />
   </Step>
 
-  <Step name="Test Step 2">
+  <Step {multi} name="Test Step 2">
     <Field
+      {store}
       field={{ id: 'test_input_2', name: 'test_input_2', type: FieldType.Text, placeholder: 'Test Input 2' }} />
   </Step>
 
-  <Step name="Test Step 3">
+  <Step {multi} name="Test Step 3">
     <Field
+      {store}
       field={{ id: 'test_input_3', name: 'test_input_3', type: FieldType.Text, placeholder: 'Test Input 3' }} />
   </Step>
 

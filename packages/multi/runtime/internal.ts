@@ -4,11 +4,11 @@ export function selectPath(
   val: IndexableJsonValue,
   path: Maybe<Path> | undefined,
 ): IndexableJsonValue | IndexableJsonValue[] | undefined {
-  if (!path) return;
+  if (!path) return undefined;
 
   const len = path.length;
 
-  if (len === 0) return;
+  if (len === 0) return undefined;
 
   let tracker = -1;
 
@@ -19,22 +19,24 @@ export function selectPath(
 
     if (Array.isArray(check)) {
       return test(check[path[++tracker] as number]);
-    } else {
-      const n = check[path[++tracker] as string];
-
-      if (Array.isArray(n)) {
-        return test(n as IndexableJsonValue[]);
-      } else if (n && typeof n === 'object') {
-        return test(n);
-      }
     }
 
-    return;
+    const n = check[path[++tracker] as string];
+
+    if (Array.isArray(n)) {
+      return test(n as IndexableJsonValue[]);
+    }
+
+    if (n && typeof n === 'object') {
+      return test(n);
+    }
+
+    return undefined;
   };
 
   if (val && typeof val === 'object') {
     return test(val);
   }
 
-  return;
+  return undefined;
 }

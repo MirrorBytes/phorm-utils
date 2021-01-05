@@ -55,17 +55,20 @@ export type Item = {
   text: string;
 
   /** Classes used by item wrapper */
-  wrapper_classes?: string;
+  wrapperClasses?: string;
 
   /** Classes used by item text */
-  text_classes?: string;
+  textClasses?: string;
 };
 
 /** Generic form field props */
 export type FieldProps = {
   id: string;
   name: string;
-  /** Text, password, email, search, number, select, radio, checkbox, textarea, file, date, datetime-local, tel, or range */
+  /**
+   * Text, password, email, search, number, select, radio,
+   * checkbox, textarea, file, date, datetime-local, tel, or range
+   */
   type: FieldType;
   disabled?: Maybe<boolean>;
   readonly?: Maybe<boolean>;

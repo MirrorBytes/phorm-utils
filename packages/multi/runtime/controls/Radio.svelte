@@ -35,17 +35,17 @@
   });
 
   const onInput = (e: Event) => {
-    const checked = e.target as HTMLInputElement;
+    const check = e.target as HTMLInputElement;
 
     store.update((v) => {
       const selected = selectPath(v, path);
 
       if (selected) {
         if (!Array.isArray(selected)) {
-          selected[name] = checked.value;
+          selected[name] = check.value;
         }
       } else {
-        v[name] = checked.value;
+        v[name] = check.value;
       }
 
       return v;
@@ -61,7 +61,7 @@
 
 {#if items}
   {#each items as item, idx}
-    <div class={item.wrapper_classes}>
+    <div class={item.wrapperClasses}>
       <input
         on:input={onInput}
         type="radio"
@@ -71,7 +71,7 @@
         value={item.value}
         checked={checked !== '' ? checked === item.value : idx === 0} />
 
-      <label class={item.text_classes} for={item.id}>{item.text}</label>
+      <label class={item.textClasses} for={item.id}>{item.text}</label>
     </div>
   {/each}
 {/if}

@@ -60,7 +60,7 @@ You can pass any props into the exposed components and they'll be passed to the 
 
 - `prev`, this is a function for form control
 - `next`, this is a function for form control
-- `controls_class`, custom class passed to the controls container
+- `controlsClass`, custom class passed to the controls container
 
 `Form` passes two props back as well: `store` and `multi`. These can be accessed using the `let:` directive:
 
@@ -284,10 +284,10 @@ type Item = {
   text: string;
 
   /** Classes used by item wrapper */
-  wrapper_classes?: string;
+  wrapperClasses?: string;
 
   /** Classes used by item text */
-  text_classes?: string;
+  textClasses?: string;
 };
 ```
 

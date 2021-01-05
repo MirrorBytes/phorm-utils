@@ -14,7 +14,9 @@
 
   let visible = false;
 
-  multi.subscribe((v) => (visible = v[name] as boolean));
+  multi.subscribe((v) => {
+    visible = v[name] as boolean;
+  });
 </script>
 
 {#if visible}

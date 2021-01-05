@@ -5,7 +5,7 @@
 
   import type { IndexableJsonValue } from './types';
 
-  export let controls_class: string | undefined = undefined;
+  export let controlsClass: string | undefined = undefined;
   export let store: Writable<IndexableJsonValue> = writable({});
 
   const multi: Writable<IndexableJsonValue> = writable({});
@@ -55,7 +55,7 @@
   {...$$restProps}>
   <slot {store} {multi} {prev} {next} />
 
-  <div class={controls_class ? controls_class : ''}>
+  <div class={controlsClass}>
     {#if Object.keys($multi)[current - 1]}
       <slot name="prev" />
     {/if}

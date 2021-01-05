@@ -27,9 +27,9 @@
     if (!Array.isArray(selected)) {
       if (selected) {
         return (selected[name] as string[])?.includes(val);
-      } else {
-        return ($store[name] as string[])?.includes(val);
       }
+
+      return ($store[name] as string[])?.includes(val);
     }
 
     return false;
@@ -54,9 +54,12 @@
             v[name] = [...re, checked.value];
           }
         } else {
-          let idx;
-          while ((idx = re.indexOf(checked.value)) !== -1) {
+          let idx = re.indexOf(checked.value);
+
+          while (idx !== -1) {
             re.splice(idx, 1);
+
+            idx = re.indexOf(checked.value);
           }
         }
       }
@@ -74,7 +77,7 @@
 
 {#if items && items.length}
   {#each items as item}
-    <div class={item.wrapper_classes}>
+    <div class={item.wrapperClasses}>
       <input
         on:input={onInput}
         type="checkbox"
@@ -85,7 +88,7 @@
         checked={checkItem(item.value)}
         {...$$restProps} />
 
-      <label class={item.text_classes} for={item.id}>{item.text}</label>
+      <label class={item.textClasses} for={item.id}>{item.text}</label>
     </div>
   {/each}
 {:else}

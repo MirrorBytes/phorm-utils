@@ -42,35 +42,47 @@
   $: path = field.path;
   $: items = field.items;
 
+  $: typeInput =
+    type === FieldType.Text ||
+    type === FieldType.Password ||
+    type === FieldType.Email ||
+    type === FieldType.Search ||
+    type === FieldType.Number ||
+    type === FieldType.Tel ||
+    type === FieldType.Range ||
+    type === FieldType.File ||
+    type === FieldType.Date ||
+    type === FieldType.DatetimeLocal;
+
   const onInput = (e: Event) => dispatch('input', e);
   const onBlur = (e: Event) => dispatch('blur', e);
 
   $: store.update((v) => {
     const selected = selectPath(v, path);
 
-    if (type === FieldType.Checkbox) {
+    if (selected) {
       if (!Array.isArray(selected)) {
-        if (selected) {
+        if (type === FieldType.Checkbox) {
           selected[name] = Array.isArray(initial) ? initial : [];
         } else {
-          v[name] = Array.isArray(initial) ? initial : [];
+          selected[name] = !Array.isArray(initial) ? initial : '';
         }
       }
+
+      return v;
+    }
+
+    if (type === FieldType.Checkbox) {
+      v[name] = Array.isArray(initial) ? initial : [];
     } else {
-      if (selected) {
-        if (!Array.isArray(selected)) {
-          selected[name] = initial && !Array.isArray(initial) ? initial : '';
-        }
-      } else {
-        v[name] = initial && !Array.isArray(initial) ? initial : '';
-      }
+      v[name] = !Array.isArray(initial) ? initial : '';
     }
 
     return v;
   });
 </script>
 
-{#if type === FieldType.Text || type === FieldType.Password || type === FieldType.Email || type === FieldType.Search || type === FieldType.Number || type === FieldType.Tel || type === FieldType.Range || type === FieldType.File || type === FieldType.Date || type === FieldType.DatetimeLocal}
+{#if typeInput}
   <Input
     on:input={onInput}
     on:keydown={(e) => dispatch('keydown', e.detail)}

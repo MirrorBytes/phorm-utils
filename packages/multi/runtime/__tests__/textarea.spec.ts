@@ -2,10 +2,13 @@ import { writable, get } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import { render } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
+import { axe, toHaveNoViolations } from 'jest-axe';
 
 import type { IndexableJsonValue } from '../types';
 
 import Textarea from '../controls/Textarea.svelte';
+
+expect.extend(toHaveNoViolations);
 
 const store: Writable<IndexableJsonValue> = writable({});
 
@@ -96,4 +99,26 @@ test('path follow to update store on input', async () => {
       asdf: [{ test_text: 'asdf' }],
     },
   });
+});
+
+test('ensure a11y compliance', async () => {
+  store.set({});
+
+  const target = document.createElement('div');
+
+  target.setAttribute('role', 'main');
+
+  const { container } = render(Textarea, {
+    target: document.body.appendChild(target),
+    props: {
+      store,
+      path: ['test2', 'asdf', 0],
+      id: 'test_text',
+      name: 'test_text',
+      placeholder: 'Test Text',
+      label: { text: 'Test Text' },
+    },
+  });
+
+  expect(await axe(container)).toHaveNoViolations();
 });

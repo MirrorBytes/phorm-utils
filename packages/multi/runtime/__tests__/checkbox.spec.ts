@@ -2,10 +2,13 @@ import { writable, get } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import { render } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
+import { axe, toHaveNoViolations } from 'jest-axe';
 
 import type { IndexableJsonValue } from '../types';
 
 import Checkbox from '../controls/Checkbox.svelte';
+
+expect.extend(toHaveNoViolations);
 
 const store: Writable<IndexableJsonValue> = writable({});
 
@@ -145,4 +148,35 @@ test('path follow to update store on input', async () => {
       asdf: [{ test_checkbox: ['test_val_2'] }],
     },
   });
+});
+
+test('ensure a11y compliance', async () => {
+  store.set({});
+
+  const target = document.createElement('div');
+
+  target.setAttribute('role', 'main');
+
+  const { container } = render(Checkbox, {
+    target: document.body.appendChild(target),
+    props: {
+      store,
+      name: 'test_checkbox',
+      items: [
+        {
+          id: 'test_check_val_1',
+          value: 'test_val_1',
+          text: 'Test Check Val 1',
+        },
+        {
+          id: 'test_check_val_2',
+          value: 'test_val_2',
+          text: 'Test Check Val 2',
+        },
+      ],
+      label: { text: 'Test Check', for: 'test_checkbox' },
+    },
+  });
+
+  expect(await axe(container)).toHaveNoViolations();
 });

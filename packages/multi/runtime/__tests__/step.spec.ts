@@ -1,8 +1,11 @@
 import { tick } from 'svelte';
 import { render } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
+import { axe, toHaveNoViolations } from 'jest-axe';
 
 import FauxStepForm from './utils/FauxStepForm.svelte';
+
+expect.extend(toHaveNoViolations);
 
 test('component renders with inputs', async () => {
   const { getByPlaceholderText, getByText } = render(FauxStepForm);
@@ -44,4 +47,24 @@ test('component renders with inputs', async () => {
   expect(() => getByText('Prev')).not.toThrow();
   expect(() => getByText('Next')).toThrow();
   expect(() => getByPlaceholderText('Submit')).not.toThrow();
+});
+
+test('ensure a11y compliance', async () => {
+  const target = document.createElement('div');
+
+  target.setAttribute('role', 'main');
+
+  const { findByText, container } = render(FauxStepForm, {
+    target: document.body.appendChild(target),
+  });
+
+  expect(await axe(container)).toHaveNoViolations();
+
+  userEvent.click(await findByText('Next'));
+
+  expect(await axe(container)).toHaveNoViolations();
+
+  userEvent.click(await findByText('Next'));
+
+  expect(await axe(container)).toHaveNoViolations();
 });

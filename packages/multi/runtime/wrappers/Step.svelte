@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Writable } from 'svelte/store';
 
-  import type { IndexableJsonValue } from './types';
+  import type { IndexableJsonValue } from '../types';
 
   export let name: string;
   export let multi: Writable<IndexableJsonValue>;

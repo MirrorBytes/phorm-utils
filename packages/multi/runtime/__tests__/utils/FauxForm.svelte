@@ -1,8 +1,8 @@
 <script lang="ts">
   import { FieldType } from '../../types';
 
-  import Form from '../../Form.svelte';
-  import Field from '../../Field.svelte';
+  import Form from '../../wrappers/Form.svelte';
+  import Field from '../../wrappers/Field.svelte';
 </script>
 
 <Form let:store>

@@ -1,9 +1,9 @@
 <script lang="ts">
   import { FieldType } from '../../types';
 
-  import Form from '../../Form.svelte';
-  import Step from '../../Step.svelte';
-  import Field from '../../Field.svelte';
+  import Form from '../../wrappers/Form.svelte';
+  import Step from '../../wrappers/Step.svelte';
+  import Field from '../../wrappers/Field.svelte';
 </script>
 
 <Form let:store let:multi let:prev let:next>

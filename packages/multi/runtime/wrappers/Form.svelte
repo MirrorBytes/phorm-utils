@@ -3,7 +3,7 @@
   import { writable } from 'svelte/store';
   import type { Writable } from 'svelte/store';
 
-  import type { IndexableJsonValue } from './types';
+  import type { IndexableJsonValue } from '../types';
 
   export let controlsClass: string | undefined = undefined;
   export let store: Writable<IndexableJsonValue> = writable({});

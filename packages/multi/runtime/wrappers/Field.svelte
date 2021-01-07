@@ -2,15 +2,15 @@
   import { createEventDispatcher } from 'svelte';
   import type { Writable } from 'svelte/store';
 
-  import { FieldType } from './types';
-  import type { JsonPrim, IndexableJsonValue, FieldProps } from './types';
-  import { selectPath } from './internal';
+  import { FieldType } from '../types';
+  import type { JsonPrim, IndexableJsonValue, FieldProps } from '../types';
+  import { selectPath } from '../internal';
 
-  import Input from './controls/Input.svelte';
-  import Textarea from './controls/Textarea.svelte';
-  import Select from './controls/Select.svelte';
-  import Radio from './controls/Radio.svelte';
-  import Checkbox from './controls/Checkbox.svelte';
+  import Input from '../controls/Input.svelte';
+  import Textarea from '../controls/Textarea.svelte';
+  import Select from '../controls/Select.svelte';
+  import Radio from '../controls/Radio.svelte';
+  import Checkbox from '../controls/Checkbox.svelte';
 
   export let store: Writable<IndexableJsonValue>;
   export let field: FieldProps;

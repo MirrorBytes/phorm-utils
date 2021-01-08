@@ -20,7 +20,7 @@ test('component rendered with name and label', () => {
       name: 'test_input',
       type: 'text',
       placeholder: 'Test Input',
-      label: { text: 'Test Input', for: 'test_input' },
+      label: { text: 'Test Input' },
     },
   });
 
@@ -59,7 +59,7 @@ test('input function being called properly for file input', async () => {
       id: 'test_file',
       name: 'test_file',
       type: 'file',
-      label: { text: 'Test File', for: 'test_file' },
+      label: { text: 'Test File' },
     },
   });
 

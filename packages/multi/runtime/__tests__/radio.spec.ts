@@ -24,7 +24,7 @@ test('component rendered with elements (with given name) and label', () => {
           text: 'Test Radio Val 1',
         },
       ],
-      label: { text: 'Test Radio', for: 'test_radio' },
+      label: { text: 'Test Radio' },
     },
   });
 
@@ -52,7 +52,7 @@ test('input function being called properly', async () => {
           text: 'Test Radio Val 2',
         },
       ],
-      label: { text: 'Test Radio', for: 'test_radio' },
+      label: { text: 'Test Radio' },
     },
   });
 
@@ -87,7 +87,7 @@ test('store being updated on input', async () => {
           text: 'Test Radio Val 2',
         },
       ],
-      label: { text: 'Test Radio', for: 'test_radio' },
+      label: { text: 'Test Radio' },
     },
   });
 
@@ -131,7 +131,7 @@ test('path follow to update store on input', async () => {
           text: 'Test Radio Val 2',
         },
       ],
-      label: { text: 'Test Radio', for: 'test_radio' },
+      label: { text: 'Test Radio' },
     },
   });
 
@@ -179,7 +179,7 @@ test('ensure a11y compliance', async () => {
           text: 'Test Radio Val 2',
         },
       ],
-      label: { text: 'Test Radio', for: 'test_radio' },
+      label: { text: 'Test Radio' },
     },
   });
 

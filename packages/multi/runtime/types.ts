@@ -113,6 +113,35 @@ export type FieldProps = {
   items?: Maybe<Item[]>;
 };
 
+type Field = {
+  props: FieldProps;
+  initial?: JsonPrim;
+  selectOptions?: string[];
+};
+
+type Line = {
+  fields: Field[];
+  classes?: string;
+};
+
+export type Section = {
+  heading: string;
+  lines: Line[];
+  classes?: string;
+};
+
+export type Step = {
+  heading: string;
+  sections: Section[];
+};
+
+export type FormConfig = {
+  /** Form Name */
+  heading: string;
+  /** Form Contents */
+  contents: Step[] | Section[];
+};
+
 /** Return type of forms */
 export type SubmitType = {
   e: Event;

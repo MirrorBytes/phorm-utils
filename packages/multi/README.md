@@ -13,7 +13,7 @@
   - [Form](#form)
   - [Step](#step)
   - [Field](#field)
-- [Example](#example)
+- [Examples](#examples)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -30,7 +30,7 @@ There are three exposed components that can be used as of now:
 - [Step][step]
 - [Field][field]
 
-Field has several underlying components:
+`Field` has several underlying components:
 
 - [Checkbox][checkbox]
   - This contains checkbox groups
@@ -50,6 +50,8 @@ Field has several underlying components:
 - [Select][select]
 - [Textarea][textarea]
 
+There's an additional component that is used when giving `Form` a config: `Section`.
+
 ## Props
 
 You can pass any props into the exposed components and they'll be passed to the primary element. However, there are a few exceptions:
@@ -61,6 +63,10 @@ You can pass any props into the exposed components and they'll be passed to the 
 - `prev`, this is a function for form control
 - `next`, this is a function for form control
 - `controlsClass`, custom class passed to the controls container
+
+`Form` also has a config prop:
+
+- `config`, used for generating form (take a look at [examples](#examples))
 
 `Form` passes two props back as well: `store` and `multi`. These can be accessed using the `let:` directive:
 
@@ -345,149 +351,10 @@ This allows for the value in store to be updated properly in the nest.
 
 Note that radio will return a string value, and checkbox will return an array of string values.
 
-## Example
+## Examples
 
-- `us_states.ts`:
-
-```typescript
-export default [
-  "AK",
-  "AL",
-  "AR",
-  "AZ",
-  "CA",
-  "CO",
-  "CT",
-  "DE",
-  "FL",
-  "GA",
-  "HI",
-  "IA",
-  "ID",
-  "IL",
-  "IN",
-  "KS",
-  "KY",
-  "LA",
-  "MA",
-  "MD",
-  "ME",
-  "MI",
-  "MN",
-  "MO",
-  "MS",
-  "MT",
-  "NC",
-  "ND",
-  "NE",
-  "NH",
-  "NJ",
-  "NM",
-  "NV",
-  "NY",
-  "OH",
-  "OK",
-  "OR",
-  "PA",
-  "RI",
-  "SC",
-  "SD",
-  "TN",
-  "TX",
-  "UT",
-  "VA",
-  "WA",
-  "WI",
-  "WV",
-  "WY"
-];
-```
-
-- `Header.svelte`:
-
-```html
-<script lang="ts">
-  import type { Writable } from 'svelte/store';
-  import { IndexableJsonValue } from 'svelte-multi';
-
-  export let multi: Writable<IndexableJsonValue>;
-</script>
-
-<header>
-  {#each Object.keys($multi) as step}
-    <div class:active={$multi[step]}>{step}</div>
-  {/each}
-</header>
-```
-
-- `App.svelte`:
-
-```html
-<script lang="ts">
-  import { Form, Step, Field, FieldType } from 'svelte-multi';
-
-  import states from "./us_states";
-
-  import Header from './Header.svelte';
-
-  const onSubmit = (ev: CustomEvent<SubmitType>) => {
-    const { e, store } = ev.detail;
-
-    console.log(e, store);
-  };
-</script>
-
-<Form let:store let:multi let:prev let:next on:submit={onSubmit}>
-  <Header {multi} />
-
-  <Step {multi} name="Customer Info">
-    <Field {store} field={{ id: 'first_name', name: 'first_name', type: FieldType.Text, placeholder: 'First Name' }} />
-    <Field {store} field={{ id: 'last_name', name: 'last_name', type: FieldType.Text, placeholder: 'Last Name' }} />
-    <Field {store} field={{ id: 'phone', name: 'phone', type: FieldType.Tel, placeholder: 'Phone' }} />
-    <Field {store} field={{ id: 'email', name: 'email', type: FieldType.Email, placeholder: 'Email' }} />
-  </Step>
-
-  <Step {multi} name="Billing Info">
-    <Field {store} field={{ id: 'bill_addr', name: 'bill_addr', type: FieldType.Text, placeholder: 'Address' }} />
-    <Field {store} field={{ id: 'bill_addr2', name: 'bill_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
-    <Field {store} field={{ id: 'bill_city', name: 'bill_city', type: FieldType.Text, placeholder: 'City' }} />
-    <Field {store} field={{ id: 'bill_st', name: 'bill_st', type: FieldType.Select }}>
-      <option>State</option>
-
-      {#each states as state}
-        <option value={state}>{state}</option>
-      {/each}
-    </Field>
-    <Field {store} field={{ id: 'bill_zip', name: 'bill_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
-  </Step>
-
-  <Step {multi} name="Shipping Info">
-    <Field {store} field={{ id: 'ship_addr', name: 'ship_addr', type: FieldType.Text, placeholder: 'Address' }} />
-    <Field {store} field={{ id: 'ship_addr2', name: 'ship_addr2', type: FieldType.Text, placeholder: 'Address 2' }} />
-    <Field {store} field={{ id: 'ship_city', name: 'ship_city', type: FieldType.Text, placeholder: 'City' }} />
-    <Field {store} field={{ id: 'ship_st', name: 'ship_st', type: FieldType.Select }}>
-      <option>State</option>
-
-      {#each states as state}
-        <option value={state}>{state}</option>
-      {/each}
-    </Field>
-    <Field {store} field={{ id: 'ship_zip', name: 'ship_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
-  </Step>
-
-  <Step {multi} name="Payment Info">
-    <Field {store} field={{ id: 'card', name: 'card', type: FieldType.Number, placeholder: 'Card Number' }} />
-    <Field {store} field={{ id: 'month', name: 'month', type: FieldType.Number, placeholder: 'Month' }} />
-    <Field {store} field={{ id: 'year', name: 'year', type: FieldType.Number, placeholder: 'Year' }} />
-    <Field {store} field={{ id: 'cvv', name: 'cvv', type: FieldType.Number, placeholder: 'CVV' }} />
-    <Field {store} field={{ id: 'card_zip', name: 'card_zip', type: FieldType.Number, placeholder: 'Zip Code' }} />
-  </Step>
-
-  <button slot="prev" on:click|preventDefault={prev}>Prev</button>
-  <button slot="next" on:click|preventDefault={next}>Next</button>
-  <input slot="submit" type="submit" placeholder="Submit" />
-</Form>
-```
+- [Manual][ex_manual]
+- [Config][ex_config]
 
 
 
@@ -501,3 +368,6 @@ export default [
 [radio]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/controls/Radio.svelte
 [select]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/controls/Select.svelte
 [textarea]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/controls/Textarea.svelte
+
+[ex_manual]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/examples/manual
+[ex_config]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/examples/config

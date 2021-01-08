@@ -19,5 +19,5 @@
     "importsNotUsedAsValues": "error",
     "isolatedModules": true
   },
-  "exclude": ["runtime/__tests__", "dist"]
+  "exclude": ["runtime/__tests__", "dist", "examples"]
 }

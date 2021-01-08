@@ -24,7 +24,7 @@ test('component rendered with elements (with given name) and label', () => {
           text: 'Test Check Val 1',
         },
       ],
-      label: { text: 'Test Check', for: 'test_checkbox' },
+      label: { text: 'Test Check' },
     },
   });
 
@@ -47,7 +47,7 @@ test('input function being called properly', async () => {
           text: 'Test Check Val 1',
         },
       ],
-      label: { text: 'Test Check', for: 'test_checkbox' },
+      label: { text: 'Test Check' },
     },
   });
 
@@ -80,7 +80,7 @@ test('store being updated on input', async () => {
           text: 'Test Check Val 2',
         },
       ],
-      label: { text: 'Test Check', for: 'test_checkbox' },
+      label: { text: 'Test Check' },
     },
   });
 
@@ -125,7 +125,7 @@ test('path follow to update store on input', async () => {
           text: 'Test Check Val 2',
         },
       ],
-      label: { text: 'Test Check', for: 'test_checkbox' },
+      label: { text: 'Test Check' },
     },
   });
 
@@ -174,7 +174,7 @@ test('ensure a11y compliance', async () => {
           text: 'Test Check Val 2',
         },
       ],
-      label: { text: 'Test Check', for: 'test_checkbox' },
+      label: { text: 'Test Check' },
     },
   });
 

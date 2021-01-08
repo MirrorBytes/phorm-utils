@@ -3,10 +3,29 @@
   import { writable } from 'svelte/store';
   import type { Writable } from 'svelte/store';
 
-  import type { IndexableJsonValue } from '../types';
+  import type {
+    IndexableJsonValue,
+    FormConfig,
+    Step as StepType,
+    Section as SectionType,
+  } from '../types';
 
-  export let controlsClass: string | undefined = undefined;
+  import Step from './Step.svelte';
+  import Section from '../organization/Section.svelte';
+
   export let store: Writable<IndexableJsonValue> = writable({});
+  export let config: FormConfig | undefined = undefined;
+  export let controlsClass: string | undefined = undefined;
+
+  // Only used if config is provided.
+  const steps = (config?.contents as StepType[])?.[0].sections
+    ? (config?.contents as StepType[])
+    : undefined;
+
+  // Only used if config is provided.
+  const sections = (config?.contents as SectionType[])?.[0].lines
+    ? (config?.contents as SectionType[])
+    : undefined;
 
   const multi: Writable<IndexableJsonValue> = writable({});
 
@@ -54,6 +73,26 @@
   on:click={onClick}
   {...$$restProps}>
   <slot {store} {multi} {prev} {next} />
+
+  {#if config}
+    {#if steps}
+      <h1>{config.heading}</h1>
+
+      {#each steps as step}
+        <Step name={step.heading} {multi}>
+          {#each step.sections as section}
+            <Section {store} {section} inStep={true} />
+          {/each}
+        </Step>
+      {/each}
+    {:else if sections}
+      <h1>{config.heading}</h1>
+
+      {#each sections as section}
+        <Section {store} {section} inStep={false} />
+      {/each}
+    {/if}
+  {/if}
 
   <div class={controlsClass}>
     {#if Object.keys($multi)[current - 1]}

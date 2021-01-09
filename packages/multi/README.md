@@ -398,9 +398,9 @@ The class props will be passed like this:
 
 
 
-[form]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/wrapper/Form.svelte
-[step]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/wrapper/Step.svelte
-[field]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/wrapper/Field.svelte
+[form]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/wrappers/Form.svelte
+[step]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/wrappers/Step.svelte
+[field]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/wrappers/Field.svelte
 [toc]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/organization/ToC.svelte
 [types]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/types.ts#L17
 [checkbox]: https://github.com/MirrorBytes/phorm-utils/blob/main/packages/multi/runtime/controls/Checkbox.svelte

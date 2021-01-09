@@ -20,15 +20,17 @@
   {#each section.lines as line}
     <div class={line.classes}>
       {#each line.fields as field}
-        {#if !field.selectOptions}
-          <Field {store} field={field.props} initial={field.initial} />
-        {:else}
-          <Field {store} field={field.props} initial={field.initial}>
-            {#each field.selectOptions as option}
-              <option value={option}>{option}</option>
-            {/each}
-          </Field>
-        {/if}
+        <div class={field.classes}>
+          {#if !field.selectOptions}
+            <Field {store} field={field.props} initial={field.initial} />
+          {:else}
+            <Field {store} field={field.props} initial={field.initial}>
+              {#each field.selectOptions as option}
+                <option value={option}>{option}</option>
+              {/each}
+            </Field>
+          {/if}
+        </div>
       {/each}
     </div>
   {/each}

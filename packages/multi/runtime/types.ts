@@ -117,6 +117,7 @@ type Field = {
   props: FieldProps;
   initial?: JsonPrim;
   selectOptions?: string[];
+  classes?: string;
 };
 
 type Line = {

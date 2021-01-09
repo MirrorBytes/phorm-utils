@@ -66,9 +66,10 @@ You can pass any props into the exposed components and they'll be passed to the 
 - `next`, this is a function for form control
 - `controlsClass`, custom class passed to the controls container
 
-`Form` also has a config prop:
+`Form` also has a `config` prop w/ optional content wrapper:
 
 - `config`, used for generating form (take a look at [examples](#examples))
+- `ContentWrap`, svelte component used to wrap sections
 
 `Form` passes two props back as well: `store` and `multi`. These can be accessed using the `let:` directive:
 
@@ -367,24 +368,30 @@ There are several exposed props:
 The class props will be passed like this:
 
 ```html
+<h1>{formName}</h1>
+
 <ul {...$$restProps}>
   ...
 
-  <li class={stepClass}>
-    ...
-
-    <ul class={sectionsWrapperClass}> <!-- Used only when passing generated sections -->
+  {#each steps as step}
+    <li class={stepClass}>
       ...
 
-      <li class={sectionsClass}>
+      <ul class={sectionsWrapperClass}> <!-- Used only when passing generated sections -->
         ...
-      </li>
+
+        {#each step.sections as section}
+          <li class={sectionsClass}>
+            ...
+          </li>
+        {/each}
+
+        ...
+      </ul>
 
       ...
-    </ul>
-
-    ...
-  </li>
+    </li>
+  {/each}
 
   ...
 </ul>

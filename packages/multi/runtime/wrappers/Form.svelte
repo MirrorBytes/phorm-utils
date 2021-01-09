@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte';
+  import type { SvelteComponentTyped } from 'svelte';
   import { writable } from 'svelte/store';
   import type { Writable } from 'svelte/store';
 
@@ -15,6 +16,7 @@
 
   export let store: Writable<IndexableJsonValue> = writable({});
   export let config: FormConfig | undefined = undefined;
+  export let ContentWrap: SvelteComponentTyped | undefined = undefined;
   export let controlsClass: string | undefined = undefined;
 
   // Only used if config is provided.
@@ -75,9 +77,25 @@
   <slot {store} {multi} {prev} {next} />
 
   {#if config}
-    {#if steps}
-      <h1>{config.heading}</h1>
+    <h1>{config.heading}</h1>
 
+    {#if ContentWrap}
+      <svelte:component this={ContentWrap}>
+        {#if steps}
+          {#each steps as step}
+            <Step name={step.heading} {multi}>
+              {#each step.sections as section}
+                <Section {store} {section} inStep={true} />
+              {/each}
+            </Step>
+          {/each}
+        {:else if sections}
+          {#each sections as section}
+            <Section {store} {section} inStep={false} />
+          {/each}
+        {/if}
+      </svelte:component>
+    {:else if steps}
       {#each steps as step}
         <Step name={step.heading} {multi}>
           {#each step.sections as section}
@@ -86,8 +104,6 @@
         </Step>
       {/each}
     {:else if sections}
-      <h1>{config.heading}</h1>
-
       {#each sections as section}
         <Section {store} {section} inStep={false} />
       {/each}

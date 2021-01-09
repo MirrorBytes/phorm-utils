@@ -24,6 +24,8 @@ test('component submits without error', async () => {
   const input = await findByLabelText('Test Input');
   const submit = await findByDisplayValue('Submit');
 
+  expect((input as HTMLInputElement).value).toBe('');
+
   component.$on('submit', (ev) => {
     const { store } = ev.detail;
 

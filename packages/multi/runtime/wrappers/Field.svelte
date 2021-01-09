@@ -65,7 +65,7 @@
         if (type === FieldType.Checkbox) {
           selected[name] = Array.isArray(initial) ? initial : [];
         } else {
-          selected[name] = !Array.isArray(initial) ? initial : '';
+          selected[name] = initial && !Array.isArray(initial) ? initial : '';
         }
       }
 
@@ -75,7 +75,7 @@
     if (type === FieldType.Checkbox) {
       v[name] = Array.isArray(initial) ? initial : [];
     } else {
-      v[name] = !Array.isArray(initial) ? initial : '';
+      v[name] = initial && !Array.isArray(initial) ? initial : '';
     }
 
     return v;

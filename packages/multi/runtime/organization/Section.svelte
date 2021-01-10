@@ -11,10 +11,12 @@
 </script>
 
 <div class={section.classes}>
-  {#if inStep}
-    <h3>{section.heading}</h3>
-  {:else}
-    <h2>{section.heading}</h2>
+  {#if section.heading}
+    {#if inStep}
+      <h3>{section.heading}</h3>
+    {:else}
+      <h2>{section.heading}</h2>
+    {/if}
   {/if}
 
   {#each section.lines as line}

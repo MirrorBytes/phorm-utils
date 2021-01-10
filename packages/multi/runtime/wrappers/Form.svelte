@@ -17,6 +17,7 @@
   export let store: Writable<IndexableJsonValue> = writable({});
   export let config: FormConfig | undefined = undefined;
   export let ContentWrap: SvelteComponentTyped | undefined = undefined;
+  export let contentWrapProps: Record<string, unknown> | undefined = undefined;
   export let controlsClass: string | undefined = undefined;
 
   // Only used if config is provided.
@@ -80,7 +81,7 @@
     <h1>{config.heading}</h1>
 
     {#if ContentWrap}
-      <svelte:component this={ContentWrap}>
+      <svelte:component this={ContentWrap} {...contentWrapProps}>
         {#if steps}
           {#each steps as step}
             <Step name={step.heading} {multi}>

@@ -113,20 +113,20 @@ export type FieldProps = {
   items?: Maybe<Item[]>;
 };
 
-type Field = {
+export type FieldConfig = {
   props: FieldProps;
   initial?: JsonPrim;
   selectOptions?: string[];
   classes?: string;
 };
 
-type Line = {
-  fields: Field[];
+export type Line = {
+  fields: FieldConfig[];
   classes?: string;
 };
 
 export type Section = {
-  heading: string;
+  heading?: string;
   lines: Line[];
   classes?: string;
 };

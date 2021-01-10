@@ -85,28 +85,28 @@
         {#if steps}
           {#each steps as step}
             <Step name={step.heading} {multi}>
-              {#each step.sections as section}
-                <Section {store} {section} inStep={true} />
+              {#each step.sections as section, sIdx}
+                <Section {store} {section} {sIdx} inStep={true} />
               {/each}
             </Step>
           {/each}
         {:else if sections}
-          {#each sections as section}
-            <Section {store} {section} inStep={false} />
+          {#each sections as section, sIdx}
+            <Section {store} {section} {sIdx} inStep={false} />
           {/each}
         {/if}
       </svelte:component>
     {:else if steps}
       {#each steps as step}
         <Step name={step.heading} {multi}>
-          {#each step.sections as section}
-            <Section {store} {section} inStep={true} />
+          {#each step.sections as section, sIdx}
+            <Section {store} {section} {sIdx} inStep={true} />
           {/each}
         </Step>
       {/each}
     {:else if sections}
-      {#each sections as section}
-        <Section {store} {section} inStep={false} />
+      {#each sections as section, sIdx}
+        <Section {store} {section} {sIdx} inStep={false} />
       {/each}
     {/if}
   {/if}

@@ -8,9 +8,10 @@
   export let store: Writable<IndexableJsonValue>;
   export let section: Section;
   export let inStep: boolean;
+  export let sIdx: number;
 </script>
 
-<div class={section.classes}>
+<div class={section.classes} data-key={sIdx}>
   {#if section.heading}
     {#if inStep}
       <h3>{section.heading}</h3>
@@ -19,10 +20,10 @@
     {/if}
   {/if}
 
-  {#each section.lines as line}
-    <div class={line.classes}>
-      {#each line.fields as field}
-        <div class={field.classes}>
+  {#each section.lines as line, lIdx}
+    <div class={line.classes} data-key={lIdx}>
+      {#each line.fields as field, fIdx}
+        <div class={field.classes} data-key={fIdx}>
           {#if !field.selectOptions}
             <Field {store} field={field.props} initial={field.initial} />
           {:else}

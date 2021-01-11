@@ -8,7 +8,7 @@ import pkg from './package.json';
 
 const { preprocess } = require('./svelte.config');
 
-const production = !process.env.ROLLUP_WATCH;
+const dev = process.env.ROLLUP_WATCH;
 
 export default {
   input: 'runtime/index.ts',
@@ -21,7 +21,8 @@ export default {
     svelte({
       // enable run-time checks when not in production
       compilerOptions: {
-        dev: !production,
+        // Without this, dynamic components don't work.
+        dev: true,
       },
       preprocess,
     }),
@@ -42,9 +43,6 @@ export default {
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify
-    production &&
-      terser({
-        module: true,
-      }),
+    !dev && terser(),
   ],
 };

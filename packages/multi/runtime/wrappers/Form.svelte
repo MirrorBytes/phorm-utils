@@ -16,7 +16,7 @@
 
   export let store: Writable<IndexableJsonValue> = writable({});
   export let config: FormConfig | undefined = undefined;
-  export let ContentWrap: SvelteComponentDev | undefined = undefined;
+  export let ContentWrap: typeof SvelteComponentDev | undefined = undefined;
   export let contentWrapProps: Record<string, unknown> | undefined = undefined;
   export let controlsClass: string | undefined = undefined;
 
@@ -74,7 +74,8 @@
   on:submit|preventDefault={onSubmit}
   on:contextmenu={onContextMenu}
   on:click={onClick}
-  {...$$restProps}>
+  {...$$restProps}
+>
   <slot {store} {multi} {prev} {next} />
 
   {#if config}

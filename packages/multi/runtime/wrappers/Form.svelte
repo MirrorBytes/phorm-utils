@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte';
-  import type { SvelteComponentTyped } from 'svelte';
+  import type { SvelteComponentDev } from 'svelte/internal';
   import { writable } from 'svelte/store';
   import type { Writable } from 'svelte/store';
 
@@ -16,7 +16,7 @@
 
   export let store: Writable<IndexableJsonValue> = writable({});
   export let config: FormConfig | undefined = undefined;
-  export let ContentWrap: SvelteComponentTyped | undefined = undefined;
+  export let ContentWrap: SvelteComponentDev | undefined = undefined;
   export let contentWrapProps: Record<string, unknown> | undefined = undefined;
   export let controlsClass: string | undefined = undefined;
 

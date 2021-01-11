@@ -1,8 +1,8 @@
 import { render } from '@testing-library/svelte';
 import { axe, toHaveNoViolations } from 'jest-axe';
 
-import FauxWrapped from './utils/FauxWrapped.svelte';
 import Form from '../wrappers/Form.svelte';
+import FauxWrapped from './utils/FauxWrapped.svelte';
 
 expect.extend(toHaveNoViolations);
 

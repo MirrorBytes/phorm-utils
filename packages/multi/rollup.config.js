@@ -4,6 +4,8 @@ import typescript from '@rollup/plugin-typescript';
 import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
 
+import pkg from './package.json';
+
 const { preprocess } = require('./svelte.config');
 
 const production = !process.env.ROLLUP_WATCH;
@@ -11,12 +13,10 @@ const production = !process.env.ROLLUP_WATCH;
 export default {
   input: 'runtime/index.ts',
   inlineDynamicImports: true,
-  output: {
-    sourcemap: true,
-    format: 'cjs',
-    name: 'multi',
-    dir: 'dist',
-  },
+  output: [
+    { file: pkg.module, format: 'es', sourcemap: true },
+    { file: pkg.main, format: 'umd', name: 'multi', sourcemap: true },
+  ],
   plugins: [
     svelte({
       // enable run-time checks when not in production

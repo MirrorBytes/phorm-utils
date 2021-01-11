@@ -19,7 +19,7 @@ test('component rendered with name and label', () => {
       id: 'test_text',
       name: 'test_text',
       placeholder: 'Test Text',
-      label: { text: 'Test Text', for: 'test_text' },
+      label: { text: 'Test Text' },
     },
   });
 

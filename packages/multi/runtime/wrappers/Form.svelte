@@ -21,12 +21,12 @@
   export let controlsClass: string | undefined = undefined;
 
   // Only used if config is provided.
-  const steps = (config?.contents as StepType[])?.[0].sections
+  $: steps = (config?.contents as StepType[])?.[0]?.sections
     ? (config?.contents as StepType[])
     : undefined;
 
   // Only used if config is provided.
-  const sections = (config?.contents as SectionType[])?.[0].lines
+  $: sections = (config?.contents as SectionType[])?.[0]?.lines
     ? (config?.contents as SectionType[])
     : undefined;
 

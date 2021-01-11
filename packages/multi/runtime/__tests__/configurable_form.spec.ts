@@ -1,7 +1,8 @@
-import { render } from '@testing-library/svelte';
+import { render, fireEvent } from '@testing-library/svelte';
 import { axe, toHaveNoViolations } from 'jest-axe';
 
 import Form from '../wrappers/Form.svelte';
+import FauxReactiveConfigForm from './utils/FauxReactiveConfigForm.svelte';
 import FauxWrapped from './utils/FauxWrapped.svelte';
 
 expect.extend(toHaveNoViolations);
@@ -23,7 +24,7 @@ test('component renders with sections of inputs', () => {
                       name: 'test_input',
                       type: 'text',
                       placeholder: 'Test Input',
-                      label: { text: 'Test Input', for: 'test_input' },
+                      label: { text: 'Test Input' },
                     },
                   },
                 ],
@@ -34,6 +35,20 @@ test('component renders with sections of inputs', () => {
       },
     },
   });
+
+  expect(() => getByText('Test Form')).not.toThrow();
+  expect(() => getByText('Test Section')).not.toThrow();
+  expect(() => getByLabelText('Test Input')).not.toThrow();
+});
+
+test('component renders with reactive config', async () => {
+  const { getByText, findByText, getByLabelText } = render(
+    FauxReactiveConfigForm,
+  );
+
+  const button = await findByText('Change Config');
+
+  await fireEvent.click(button);
 
   expect(() => getByText('Test Form')).not.toThrow();
   expect(() => getByText('Test Section')).not.toThrow();
@@ -58,7 +73,7 @@ test('component renders custom wrapped sections of inputs', () => {
                       name: 'test_input',
                       type: 'text',
                       placeholder: 'Test Input',
-                      label: { text: 'Test Input', for: 'test_input' },
+                      label: { text: 'Test Input' },
                     },
                   },
                 ],
@@ -104,7 +119,7 @@ test('ensure a11y compliance', async () => {
                       name: 'test_input',
                       type: 'text',
                       placeholder: 'Test Input',
-                      label: { text: 'Test Input', for: 'test_input' },
+                      label: { text: 'Test Input' },
                     },
                   },
                 ],

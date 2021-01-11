@@ -6,7 +6,7 @@
     "types": ["svelte", "jest"],
     "rootDir": "./runtime",
     "declaration": true,
-    "declarationDir": "./dist/types",
+    "declarationDir": "./types",
     "esModuleInterop": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,

@@ -20,21 +20,25 @@
     {/if}
   {/if}
 
-  {#each section.lines as line, lIdx}
-    <div class={line.classes} data-key={lIdx}>
-      {#each line.fields as field, fIdx}
-        <div class={field.classes} data-key={fIdx}>
-          {#if !field.selectOptions}
-            <Field {store} field={field.props} initial={field.initial} />
-          {:else}
-            <Field {store} field={field.props} initial={field.initial}>
-              {#each field.selectOptions as option}
-                <option value={option}>{option}</option>
-              {/each}
-            </Field>
-          {/if}
-        </div>
-      {/each}
-    </div>
-  {/each}
+  {#if section.lines.length}
+    {#each section.lines as line, lIdx}
+      <div class={line.classes} data-key={lIdx}>
+        {#if line.fields.length}
+          {#each line.fields as field, fIdx}
+            <div class={field.classes} data-key={fIdx}>
+              {#if !field.selectOptions}
+                <Field {store} field={field.props} initial={field.initial} />
+              {:else}
+                <Field {store} field={field.props} initial={field.initial}>
+                  {#each field.selectOptions as option}
+                    <option value={option}>{option}</option>
+                  {/each}
+                </Field>
+              {/if}
+            </div>
+          {/each}
+        {:else}No fields provided{/if}
+      </div>
+    {/each}
+  {:else}No lines provided{/if}
 </div>

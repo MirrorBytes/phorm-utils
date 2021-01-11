@@ -84,31 +84,43 @@
     {#if ContentWrap}
       <svelte:component this={ContentWrap} {...contentWrapProps}>
         {#if steps}
-          {#each steps as step}
-            <Step name={step.heading} {multi}>
-              {#each step.sections as section, sIdx}
-                <Section {store} {section} {sIdx} inStep={true} />
-              {/each}
-            </Step>
-          {/each}
+          {#if steps.length}
+            {#each steps as step}
+              <Step name={step.heading} {multi}>
+                {#if step.sections}
+                  {#each step.sections as section, sIdx}
+                    <Section {store} {section} {sIdx} inStep={true} />
+                  {/each}
+                {:else}No sections provided{/if}
+              </Step>
+            {/each}
+          {:else}No steps provided{/if}
         {:else if sections}
-          {#each sections as section, sIdx}
-            <Section {store} {section} {sIdx} inStep={false} />
-          {/each}
+          {#if sections.length}
+            {#each sections as section, sIdx}
+              <Section {store} {section} {sIdx} inStep={false} />
+            {/each}
+          {:else}No sections provided{/if}
         {/if}
       </svelte:component>
     {:else if steps}
-      {#each steps as step}
-        <Step name={step.heading} {multi}>
-          {#each step.sections as section, sIdx}
-            <Section {store} {section} {sIdx} inStep={true} />
-          {/each}
-        </Step>
-      {/each}
+      {#if steps.length}
+        {#each steps as step}
+          <Step name={step.heading} {multi}>
+            {#if step.sections}
+              {#each step.sections as section, sIdx}
+                <Section {store} {section} {sIdx} inStep={true} />
+              {/each}
+            {:else}No sections provided{/if}
+          </Step>
+        {/each}
+      {:else}No steps provided{/if}
     {:else if sections}
-      {#each sections as section, sIdx}
-        <Section {store} {section} {sIdx} inStep={false} />
-      {/each}
+      {#if sections.length}
+        {#each sections as section, sIdx}
+          <Section {store} {section} {sIdx} inStep={false} />
+        {/each}
+      {:else}No sections provided{/if}
     {/if}
   {/if}
 

@@ -8,24 +8,42 @@
 </script>
 
 <Form let:store let:multi let:prev let:next>
-  <ToC formName="Test Form" steps={multi} />
+  <ToC formName="Test Form" stepsWithoutSections={multi} />
 
   <Step {multi} name="Test Step 1">
     <Field
       {store}
-      field={{ id: 'test_input', name: 'test_input', type: FieldType.Text, label: { text: 'Test Input 1' } }} />
+      field={{
+        id: 'test_input',
+        name: 'test_input',
+        type: FieldType.Text,
+        label: { text: 'Test Input 1' },
+      }}
+    />
   </Step>
 
   <Step {multi} name="Test Step 2">
     <Field
       {store}
-      field={{ id: 'test_input_2', name: 'test_input_2', type: FieldType.Text, label: { text: 'Test Input 2' } }} />
+      field={{
+        id: 'test_input_2',
+        name: 'test_input_2',
+        type: FieldType.Text,
+        label: { text: 'Test Input 2' },
+      }}
+    />
   </Step>
 
   <Step {multi} name="Test Step 3">
     <Field
       {store}
-      field={{ id: 'test_input_3', name: 'test_input_3', type: FieldType.Text, label: { text: 'Test Input 3' } }} />
+      field={{
+        id: 'test_input_3',
+        name: 'test_input_3',
+        type: FieldType.Text,
+        label: { text: 'Test Input 3' },
+      }}
+    />
   </Step>
 
   <button slot="prev" on:click|preventDefault={prev}>Prev</button>

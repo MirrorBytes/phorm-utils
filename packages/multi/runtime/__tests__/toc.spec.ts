@@ -19,7 +19,7 @@ test('component renders with all headings from Step array', () => {
   const { getByText, getAllByText } = render(ToC, {
     props: {
       formName: 'Test Form',
-      steps: [
+      stepsWithSections: [
         {
           heading: 'Test Step 1',
           sections: [

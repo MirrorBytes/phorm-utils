@@ -10,19 +10,37 @@
   <Step {multi} name="Test Step 1">
     <Field
       {store}
-      field={{ id: 'test_input', name: 'test_input', type: FieldType.Text, placeholder: 'Test Input' }} />
+      field={{
+        id: 'test_input',
+        name: 'test_input',
+        type: FieldType.Text,
+        placeholder: 'Test Input',
+      }}
+    />
   </Step>
 
   <Step {multi} name="Test Step 2">
     <Field
       {store}
-      field={{ id: 'test_input_2', name: 'test_input_2', type: FieldType.Text, placeholder: 'Test Input 2' }} />
+      field={{
+        id: 'test_input_2',
+        name: 'test_input_2',
+        type: FieldType.Text,
+        placeholder: 'Test Input 2',
+      }}
+    />
   </Step>
 
   <Step {multi} name="Test Step 3">
     <Field
       {store}
-      field={{ id: 'test_input_3', name: 'test_input_3', type: FieldType.Text, placeholder: 'Test Input 3' }} />
+      field={{
+        id: 'test_input_3',
+        name: 'test_input_3',
+        type: FieldType.Text,
+        placeholder: 'Test Input 3',
+      }}
+    />
   </Step>
 
   <button slot="prev" on:click|preventDefault={prev}>Prev</button>

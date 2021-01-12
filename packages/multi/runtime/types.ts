@@ -37,7 +37,7 @@ export type LabelProps = {
   text: string;
 
   /** Optional prop for label */
-  classes?: string;
+  classes?: Maybe<string>;
 };
 
 /** Array of strings and numbers that allow access to deep nested values in form stores. */
@@ -55,10 +55,10 @@ export type Item = {
   text: string;
 
   /** Classes used by item wrapper */
-  wrapperClasses?: string;
+  wrapperClasses?: Maybe<string>;
 
   /** Classes used by item text */
-  textClasses?: string;
+  textClasses?: Maybe<string>;
 };
 
 /** Generic form field props */
@@ -115,20 +115,20 @@ export type FieldProps = {
 
 export type FieldConfig = {
   props: FieldProps;
-  initial?: JsonPrim;
-  selectOptions?: string[];
-  classes?: string;
+  initial?: Maybe<JsonPrim>;
+  selectOptions?: Maybe<string[]>;
+  classes?: Maybe<string>;
 };
 
 export type Line = {
   fields: FieldConfig[];
-  classes?: string;
+  classes?: Maybe<string>;
 };
 
 export type Section = {
-  heading?: string;
+  heading?: Maybe<string>;
   lines: Line[];
-  classes?: string;
+  classes?: Maybe<string>;
 };
 
 export type Step = {

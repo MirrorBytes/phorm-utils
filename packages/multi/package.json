@@ -1,6 +1,6 @@
 {
   "name": "svelte-multi",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "license": "ISC",
   "types": "index.d.ts",
   "main": "dist/index.js",

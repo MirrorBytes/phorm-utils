@@ -49,7 +49,9 @@
   };
 </script>
 
-{#if label}<label for={id} class={label.classes}>{label.text}</label>{/if}
+{#if label}
+  <label for={id} class={label.classes || undefined}>{label.text}</label>
+{/if}
 
 <select
   bind:value

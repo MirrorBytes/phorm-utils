@@ -11,7 +11,7 @@
   export let sIdx: number;
 </script>
 
-<div class={section.classes} data-key={sIdx}>
+<div class={section.classes || undefined} data-key={sIdx}>
   {#if section.heading}
     {#if inStep}
       <h3>{section.heading}</h3>
@@ -22,10 +22,10 @@
 
   {#if section.lines.length}
     {#each section.lines as line, lIdx}
-      <div class={line.classes} data-key={lIdx}>
+      <div class={line.classes || undefined} data-key={lIdx}>
         {#if line.fields.length}
           {#each line.fields as field, fIdx}
-            <div class={field.classes} data-key={fIdx}>
+            <div class={field.classes || undefined} data-key={fIdx}>
               {#if !field.selectOptions}
                 <Field {store} field={field.props} initial={field.initial} />
               {:else}

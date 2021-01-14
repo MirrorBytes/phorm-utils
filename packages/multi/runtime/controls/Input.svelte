@@ -49,7 +49,9 @@
   };
 </script>
 
-{#if label}<label for={id} class={label.classes}>{label.text}</label>{/if}
+{#if label}
+  <label for={id} class={label.classes || undefined}>{label.text}</label>
+{/if}
 
 <input
   bind:value
@@ -58,4 +60,5 @@
   {id}
   {name}
   class={classes}
-  {...$$restProps} />
+  {...$$restProps}
+/>

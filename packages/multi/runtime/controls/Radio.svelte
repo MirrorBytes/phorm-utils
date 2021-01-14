@@ -56,12 +56,12 @@
 </script>
 
 {#if label}
-  <div class={label.classes}>{label.text}</div>
+  <div class={label.classes || undefined}>{label.text}</div>
 {/if}
 
 {#if items}
   {#each items as item, idx}
-    <div class={item.wrapperClasses}>
+    <div class={item.wrapperClasses || undefined}>
       <input
         on:input={onInput}
         type="radio"
@@ -69,9 +69,12 @@
         {name}
         class={classes}
         value={item.value}
-        checked={checked !== '' ? checked === item.value : idx === 0} />
+        checked={checked !== '' ? checked === item.value : idx === 0}
+      />
 
-      <label class={item.textClasses} for={item.id}>{item.text}</label>
+      <label class={item.textClasses || undefined} for={item.id}
+        >{item.text}</label
+      >
     </div>
   {/each}
 {/if}

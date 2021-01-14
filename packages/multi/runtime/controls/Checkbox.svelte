@@ -72,12 +72,12 @@
 </script>
 
 {#if label}
-  <div class={label.classes}>{label.text}</div>
+  <div class={label.classes || undefined}>{label.text}</div>
 {/if}
 
 {#if items && items.length}
   {#each items as item}
-    <div class={item.wrapperClasses}>
+    <div class={item.wrapperClasses || undefined}>
       <input
         on:input={onInput}
         type="checkbox"
@@ -86,9 +86,12 @@
         class={classes}
         value={item.value}
         checked={checkItem(item.value)}
-        {...$$restProps} />
+        {...$$restProps}
+      />
 
-      <label class={item.textClasses} for={item.id}>{item.text}</label>
+      <label class={item.textClasses || undefined} for={item.id}
+        >{item.text}</label
+      >
     </div>
   {/each}
 {:else}

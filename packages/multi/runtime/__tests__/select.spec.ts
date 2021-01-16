@@ -5,8 +5,9 @@ import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 
 import type { IndexableJsonValue } from '../types';
+import states from './utils/us_states';
 
-import FauxSelect from './utils/FauxSelect.svelte';
+// import FauxSelect from './utils/FauxSelect.svelte';
 import Select from '../controls/Select.svelte';
 
 expect.extend(toHaveNoViolations);
@@ -19,6 +20,7 @@ test('component rendered with name and placeholder', () => {
       store,
       id: 'test_select',
       name: 'test_select',
+      items: [],
       label: { text: 'Test Select' },
     },
   });
@@ -35,6 +37,7 @@ test('blur function being called properly', async () => {
       store,
       id: 'test_select',
       name: 'test_select',
+      items: [],
       label: { text: 'Test Select' },
     },
   });
@@ -50,11 +53,16 @@ test('blur function being called properly', async () => {
 });
 
 test('store being updated on blur', async () => {
-  const { findByLabelText } = render(FauxSelect, {
+  const { findByLabelText } = render(Select, {
     props: {
       store,
       id: 'test_select',
       name: 'test_select',
+      items: states.map((state, id) => ({
+        id,
+        text: state,
+        value: state,
+      })),
       label: { text: 'Test Select' },
     },
   });
@@ -76,12 +84,17 @@ test('path follow to update store on blur', async () => {
     },
   });
 
-  const { findByLabelText } = render(FauxSelect, {
+  const { findByLabelText } = render(Select, {
     props: {
       store,
       path: ['test2', 'asdf', 0],
       id: 'test_select',
       name: 'test_select',
+      items: states.map((state, id) => ({
+        id,
+        text: state,
+        value: state,
+      })),
       label: { text: 'Test Select' },
     },
   });
@@ -105,13 +118,18 @@ test('ensure a11y compliance', async () => {
 
   target.setAttribute('role', 'main');
 
-  const { container } = render(FauxSelect, {
+  const { container } = render(Select, {
     target: document.body.appendChild(target),
     props: {
       store,
       path: ['test2', 'asdf', 0],
       id: 'test_select',
       name: 'test_select',
+      items: states.map((state, id) => ({
+        id,
+        text: state,
+        value: state,
+      })),
       label: { text: 'Test Select' },
     },
   });

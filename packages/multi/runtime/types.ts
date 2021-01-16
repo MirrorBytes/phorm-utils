@@ -109,7 +109,7 @@ export type FieldProps = {
 
   /** Optional path for nested values in store */
   path?: Maybe<Path>;
-  /** For radio and checkbox fields */
+  /** For radio, select, and checkbox fields */
   items?: Maybe<Item[]>;
 };
 

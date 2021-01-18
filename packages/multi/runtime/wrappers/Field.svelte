@@ -103,7 +103,8 @@
     {label}
     {classes}
     {path}
-    {...$$restProps} />
+    {...$$restProps}
+  />
 {:else if type === FieldType.Textarea}
   <Textarea
     on:input={onInput}
@@ -120,7 +121,8 @@
     {label}
     {classes}
     {path}
-    {...$$restProps} />
+    {...$$restProps}
+  />
 {:else if type === FieldType.Select}
   <Select
     on:blur={onBlur}
@@ -135,8 +137,10 @@
     {multiple}
     {label}
     {classes}
+    {items}
     {path}
-    {...$$restProps}>
+    {...$$restProps}
+  >
     <slot />
   </Select>
 {:else if type === FieldType.Radio}
@@ -150,5 +154,6 @@
     {path}
     {label}
     {classes}
-    {...$$restProps} />
+    {...$$restProps}
+  />
 {/if}

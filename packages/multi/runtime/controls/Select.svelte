@@ -15,7 +15,7 @@
   export let path: Maybe<Path> = [];
   export let id: string;
   export let name: string;
-  export let items: Maybe<Item[]>;
+  export let items: Maybe<Item[]> | undefined;
   export let label: Maybe<LabelProps> | undefined = undefined;
   export let classes = '';
 

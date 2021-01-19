@@ -11,7 +11,7 @@ export type JsonPrim =
   | undefined;
 
 export type IndexableJsonValue = {
-  [K in string | number]: JsonPrim | IndexableJsonValue | IndexableJsonValue[];
+  [K in string | number]: IndexableJsonValue | IndexableJsonValue[] | JsonPrim;
 };
 
 export enum FieldType {

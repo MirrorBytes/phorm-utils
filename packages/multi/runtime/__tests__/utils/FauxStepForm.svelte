@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { FieldType } from '../../types';
+  import { FieldType } from '@phorm-utils/common';
 
   import Form from '../../wrappers/Form.svelte';
   import Step from '../../wrappers/Step.svelte';

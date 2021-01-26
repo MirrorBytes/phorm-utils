@@ -4,7 +4,7 @@ import { render } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 
-import type { IndexableJsonValue } from '../types';
+import type { IndexableJsonValue } from '@phorm-utils/common';
 
 import Input from '../controls/Input.svelte';
 

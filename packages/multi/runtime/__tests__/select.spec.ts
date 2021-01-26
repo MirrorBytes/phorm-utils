@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 
-import type { IndexableJsonValue } from '../types';
+import type { IndexableJsonValue } from '@phorm-utils/common';
 import states from './utils/us_states';
 
 // import FauxSelect from './utils/FauxSelect.svelte';

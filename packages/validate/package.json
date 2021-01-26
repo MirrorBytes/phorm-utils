@@ -1,5 +1,5 @@
 {
-  "name": "@phorm-utils/multi",
+  "name": "@phorm-utils/validate",
   "version": "0.1.0",
   "license": "ISC",
   "types": "index.d.ts",
@@ -8,10 +8,10 @@
   "author": {
     "name": "MirrorBytes <smokebytes@gmail.com>"
   },
-  "homepage": "https://github.com/MirrorBytes/phorm-utils/tree/main/packages/multi",
+  "homepage": "https://github.com/MirrorBytes/phorm-utils/tree/main/packages/validate",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MirrorBytes/phorm-utils/tree/main/packages/multi"
+    "url": "https://github.com/MirrorBytes/phorm-utils/tree/main/packages/validate"
   },
   "publishConfig": {
     "access": "public"
@@ -19,8 +19,7 @@
   "keywords": [
     "svelte",
     "form",
-    "multi",
-    "step",
+    "validation",
     "ui",
     "ux"
   ],
@@ -31,12 +30,17 @@
     "dev": "rollup -cw",
     "build": "rollup -c"
   },
+  "dependencies": {
+    "validate.js": "^0.13.1"
+  },
   "peerDependencies": {
     "@phorm-utils/common": "^0.1.0",
+    "@phorm-utils/multi": "^0.1.0",
     "svelte": "^3.31.2"
   },
   "devDependencies": {
     "@phorm-utils/common": "^0.1.0",
+    "@phorm-utils/multi": "^0.1.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.1",
     "@rollup/plugin-typescript": "^8.1.0",

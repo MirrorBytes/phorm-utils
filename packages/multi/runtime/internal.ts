@@ -1,4 +1,6 @@
-import type { Maybe, IndexableJsonValue, Path } from './types';
+import type { Maybe, IndexableJsonValue } from '@phorm-utils/common';
+
+import type { Path } from './types';
 
 export function selectPath(
   val: IndexableJsonValue,

@@ -2,8 +2,10 @@
   import { createEventDispatcher } from 'svelte';
   import type { Writable } from 'svelte/store';
 
-  import { FieldType } from '../types';
-  import type { JsonPrim, IndexableJsonValue, FieldProps } from '../types';
+  import { FieldType } from '@phorm-utils/common';
+  import type { JsonPrim, IndexableJsonValue } from '@phorm-utils/common';
+
+  import type { FieldProps } from '../types';
   import { selectPath } from '../internal';
 
   import Input from '../controls/Input.svelte';

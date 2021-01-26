@@ -1,7 +1,9 @@
 <script lang="ts">
   import type { Writable } from 'svelte/store';
 
-  import type { IndexableJsonValue, Section } from '../types';
+  import type { IndexableJsonValue } from '@phorm-utils/common';
+
+  import type { Section } from '../types';
 
   import Field from '../wrappers/Field.svelte';
 

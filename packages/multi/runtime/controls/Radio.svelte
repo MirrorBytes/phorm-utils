@@ -2,13 +2,9 @@
   import { createEventDispatcher } from 'svelte';
   import type { Writable } from 'svelte/store';
 
-  import type {
-    Maybe,
-    IndexableJsonValue,
-    Path,
-    LabelProps,
-    Item,
-  } from '../types';
+  import type { Maybe, IndexableJsonValue } from '@phorm-utils/common';
+
+  import type { Path, LabelProps, Item } from '../types';
   import { selectPath } from '../internal';
 
   export let store: Writable<IndexableJsonValue>;

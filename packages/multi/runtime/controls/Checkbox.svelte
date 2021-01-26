@@ -6,10 +6,9 @@
     Maybe,
     JsonPrim,
     IndexableJsonValue,
-    Path,
-    LabelProps,
-    Item,
-  } from '../types';
+  } from '@phorm-utils/common';
+
+  import type { Path, LabelProps, Item } from '../types';
   import { selectPath } from '../internal';
 
   export let store: Writable<IndexableJsonValue>;

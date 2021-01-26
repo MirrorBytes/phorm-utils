@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "exclude": ["runtime/__tests__", "dist", "examples"],
   "compilerOptions": {
-    "types": ["svelte", "jest", "@phorm-utils/common"],
+    "types": ["svelte", "jest", "@phorm-utils/common", "@phorm-utils/multi"],
     "rootDir": "./runtime",
     "declaration": true,
     "declarationDir": "./types"

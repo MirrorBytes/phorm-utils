@@ -1,0 +1,25 @@
+{
+  "name": "@phorm-utils/common",
+  "version": "0.1.0",
+  "license": "ISC",
+  "types": "dist/types/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "author": {
+    "name": "MirrorBytes <smokebytes@gmail.com>"
+  },
+  "homepage": "https://github.com/MirrorBytes/phorm-utils/tree/main/packages/common",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MirrorBytes/phorm-utils/tree/main/packages/common"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint ./src",
+    "test": "echo",
+    "toc": "echo",
+    "build": "tsc"
+  }
+}

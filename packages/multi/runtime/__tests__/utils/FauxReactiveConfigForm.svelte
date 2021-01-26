@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { FieldType } from '../../types';
+  import { FieldType } from '@phorm-utils/common';
+
   import type { FormConfig } from '../../types';
 
   import Form from '../../wrappers/Form.svelte';

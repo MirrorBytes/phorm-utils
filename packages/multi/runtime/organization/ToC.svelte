@@ -1,7 +1,9 @@
 <script lang="ts">
   import type { Writable } from 'svelte/store';
 
-  import type { IndexableJsonValue, Step, Section } from '../types';
+  import type { IndexableJsonValue } from '@phorm-utils/common';
+
+  import type { Step, Section } from '../types';
 
   export let formName: string;
   export let stepsWithSections: Step[] | undefined = undefined;

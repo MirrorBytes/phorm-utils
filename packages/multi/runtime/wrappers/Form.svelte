@@ -4,8 +4,9 @@
   import { writable } from 'svelte/store';
   import type { Writable } from 'svelte/store';
 
+  import type { IndexableJsonValue } from '@phorm-utils/common';
+
   import type {
-    IndexableJsonValue,
     FormConfig,
     Step as StepType,
     Section as SectionType,

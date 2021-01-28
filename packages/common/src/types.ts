@@ -85,14 +85,14 @@ export interface FieldProps {
   items?: Maybe<Item[]>;
 }
 
-export interface FField {
+export interface FieldConfig {
   props: FieldProps;
 
   width?: Maybe<number>;
 }
 
 export interface Line {
-  fields: FField[];
+  fields: FieldConfig[];
 }
 
 export interface Section {

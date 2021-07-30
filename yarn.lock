@@ -1566,9 +1566,9 @@
     resolve "^1.19.0"
 
 "@rollup/plugin-typescript@^8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-typescript/-/plugin-typescript-8.1.0.tgz#b7bbbbb4fd1324834f37844efd48b3844d912742"
-  integrity sha512-pyQlcGQYRsONUDwXK3ckGPHjPzmjlq4sinzr7emW8ZMb2oZjg9WLcdcP8wyHSvBjvHrLzMayyPy079RROqb4vw==
+  version "8.2.4"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-typescript/-/plugin-typescript-8.2.4.tgz#f9dfb157512650a3a022972ca719f9bd584b62d9"
+  integrity sha512-rZ19Yv/V8mE+PZgz0P4KoXa/2pMlp2y4o2WryyxLTe1zVr6uWZzmVhITMUg+vxNwti1P5UV+n7yK4HBqmesLbA==
   dependencies:
     "@rollup/pluginutils" "^3.1.0"
     resolve "^1.17.0"

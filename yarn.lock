@@ -8498,9 +8498,9 @@ svelte-preprocess@^4.6.3:
     strip-indent "^3.0.0"
 
 svelte@^3.32.0:
-  version "3.32.0"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.32.0.tgz#06d7dcdf65e62a708c74231f7099569df43e3af6"
-  integrity sha512-+EA3qfKDG0uB16s7m1z9Nc1o01G7YC4eq1cnHOzCy+fKsvGAJrjhjBIM3zCW2eZUu639UbHQElaOPQWUjBN3Yw==
+  version "3.42.6"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.42.6.tgz#45a534d76fcdb551a2f23abf2cfee648fa248d03"
+  integrity sha512-lAcryr9Do2PeGtbodspX5I4kWj4yWYAa2WGpDCwzNkP3y8WZTxigMd4/TMO1rBZEOkMYGn4ZXrbAlSEGhK6q3w==
 
 symbol-tree@^3.2.4:
   version "3.2.4"

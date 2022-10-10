@@ -38,7 +38,7 @@
   "devDependencies": {
     "@phorm-utils/common": "^0.1.0",
     "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^11.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-typescript": "^8.1.0",
     "@testing-library/dom": "^7.29.4",
     "@testing-library/svelte": "^3.0.3",
